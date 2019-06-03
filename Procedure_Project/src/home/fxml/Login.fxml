@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controllers.LoginController">
+   <children>
+      
+      <!-- 상단 Logo -->
+      <ImageView fitHeight="283.0" fitWidth="249.0" layoutX="276.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/Myongji_Logo.gif" />
+         </image>
+      </ImageView>
+      
+      <!-- 상단 Text -->
+      <Label layoutX="305.0" layoutY="320.0" text="Myongji Univ." textFill="#10307c">
+         <font>
+            <Font name="Arial Bold" size="33.0" />
+         </font>
+      </Label>
+      
+      <Label layoutX="319.0" layoutY="375.0" text="Learning Management System" textFill="#0d1568">
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </Label>
+      
+      <!-- Login_ID TextField -->
+      <TextField fx:id="loginTextField" layoutX="279.0" layoutY="427.0" prefHeight="33.0" prefWidth="295.0" />
+      <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="229.0" layoutY="427.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/ID.png" />
+         </image>
+      </ImageView>
+      
+      <!-- Login_Password TextField -->
+      <PasswordField fx:id="loginPasswordField" layoutX="279.0" layoutY="476.0" prefHeight="33.0" prefWidth="295.0" />
+      <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="229.0" layoutY="476.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/Password_Lock.png" />
+         </image>
+      </ImageView>
+      
+      <!-- Login Button -->
+      <Button fx:id="loginButton" layoutX="293.0" layoutY="534.0" mnemonicParsing="false" prefHeight="12.0" prefWidth="97.0" text="Login" textAlignment="CENTER">
+         <effect>
+            <Lighting bumpInput="$null">
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      
+      <!-- SignUp Button -->
+      <Button fx:id="signUpButton" layoutX="435.0" layoutY="534.0" mnemonicParsing="false" prefHeight="12.0" prefWidth="97.0" text="Sign Up" textAlignment="CENTER">
+         <effect>
+            <Lighting bumpInput="$null">
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

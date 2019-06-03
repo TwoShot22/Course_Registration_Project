@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controllers.TableController">
+   <children>
+      <AnchorPane prefHeight="150.0" prefWidth="800.0" style="-fx-background-color: #2D75E8;">
+         <children>
+            <Label layoutX="33.0" layoutY="20.0" text="Select Lecture" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="60.0" />
+               </font>
+            </Label>
+            <Label layoutX="48.0" layoutY="89.0" text="Learning Management System" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <TableView layoutX="14.0" layoutY="204.0" prefHeight="382.0" prefWidth="773.0">
+        <columns>
+          <TableColumn prefWidth="88.0" text="Number" />
+          <TableColumn prefWidth="210.0" text="Name" />
+            <TableColumn prefWidth="97.0" text="Professor" />
+            <TableColumn prefWidth="65.0" text="Credit" />
+            <TableColumn prefWidth="123.0" text="Time" />
+            <TableColumn prefWidth="95.0" text="Basket" />
+            <TableColumn prefWidth="95.0" text="Sincheong" />
+        </columns>
+      </TableView>
+      <SplitMenuButton layoutX="14.0" layoutY="166.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="106.0" text="Campus">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Seoul Campus" />
+          <MenuItem mnemonicParsing="false" text="Yongin Campus" />
+        </items>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </SplitMenuButton>
+      <SplitMenuButton layoutX="127.0" layoutY="166.0" mnemonicParsing="false" text="College">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </SplitMenuButton>
+      <SplitMenuButton layoutX="235.0" layoutY="166.0" mnemonicParsing="false" text="Department">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </SplitMenuButton>
+   </children>
+</AnchorPane>
