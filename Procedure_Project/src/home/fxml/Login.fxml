@@ -18,7 +18,7 @@
          </image>
       </ImageView>
       
-      <!-- 상단 Text -->
+      <!-- 상단 Text Banner-->
       <Label layoutX="305.0" layoutY="320.0" text="Myongji Univ." textFill="#10307c">
          <font>
             <Font name="Arial Bold" size="33.0" />
