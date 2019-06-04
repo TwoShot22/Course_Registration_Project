@@ -1,85 +1,168 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controllers.LoginController">
+<StackPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controllers.LoginController">
    <children>
       
-      <!-- 상단 Logo Image -->
-      <ImageView fitHeight="283.0" fitWidth="249.0" layoutX="276.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../images/Myongji_Logo.gif" />
-         </image>
-      </ImageView>
+      <!-- 좌측 UI -->
+      <BorderPane maxWidth="350.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="600.0" prefWidth="350.0" style="-fx-background-color: #2196F3;" StackPane.alignment="CENTER_LEFT">
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+         
+         <center>
+            <GridPane BorderPane.alignment="CENTER_LEFT">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="257.0" minHeight="10.0" prefHeight="257.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="145.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Myongji Univ." textFill="WHITE" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Arial Bold" size="40.0" />
+                     </font></Label>
+                  <Label text="Learning Management" textFill="WHITE" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding></Label>
+                  <Label text="System" textFill="WHITE" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="30.0" />
+                     </padding></Label>
+                  <ImageView fitHeight="300.0" fitWidth="225.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" smooth="false">
+                     <image>
+                        <Image url="@../../images/Logo.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets bottom="80.0" top="50.0" />
+               </padding>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </GridPane>
+         </center>
+         <opaqueInsets>
+            <Insets right="150.0" />
+         </opaqueInsets>
+      </BorderPane>
       
-      <!-- 상단 Text Banner-->
-      <Label layoutX="305.0" layoutY="320.0" text="Myongji Univ." textFill="#10307c">
-         <font>
-            <Font name="Arial Bold" size="33.0" />
-         </font>
-      </Label>
-      
-      <Label layoutX="319.0" layoutY="375.0" text="Learning Management System" textFill="#0d1568">
-         <effect>
-            <Lighting>
-               <bumpInput>
-                  <Shadow />
-               </bumpInput>
-               <light>
-                  <Light.Distant />
-               </light>
-            </Lighting>
-         </effect>
-      </Label>
-      
-      <!-- Login_ID TextField -->
-      <TextField fx:id="loginTextField" layoutX="279.0" layoutY="427.0" prefHeight="33.0" prefWidth="295.0" />
-      <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="229.0" layoutY="427.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../images/ID.png" />
-         </image>
-      </ImageView>
-      
-      <!-- Login_Password TextField -->
-      <PasswordField fx:id="loginPasswordField" layoutX="279.0" layoutY="476.0" prefHeight="33.0" prefWidth="295.0" />
-      <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="229.0" layoutY="476.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../images/Password_Lock.png" />
-         </image>
-      </ImageView>
-      
-      <!-- Login Button -->
-      <Button fx:id="loginButton" layoutX="293.0" layoutY="534.0" mnemonicParsing="false" prefHeight="12.0" prefWidth="97.0" text="Login" textAlignment="CENTER">
-         <effect>
-            <Lighting bumpInput="$null">
-               <light>
-                  <Light.Distant />
-               </light>
-            </Lighting>
-         </effect>
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Button>
-      
-      <!-- SignUp Button -->
-      <Button fx:id="signUpButton" layoutX="435.0" layoutY="534.0" mnemonicParsing="false" prefHeight="12.0" prefWidth="97.0" text="Sign Up" textAlignment="CENTER">
-         <effect>
-            <Lighting bumpInput="$null">
-               <light>
-                  <Light.Distant />
-               </light>
-            </Lighting>
-         </effect>
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Button>
+      <!-- 우측 UI -->
+      <BorderPane style="-fx-background-color: #EDE7F6;">
+         <StackPane.margin>
+            <Insets left="340.0" />
+         </StackPane.margin>
+         <center>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints prefHeight="80.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="User Login" textFill="#2196f3">
+                     <font>
+                        <Font name="Arial Bold" size="40.0" />
+                     </font>
+                  </Label>
+                  <GridPane GridPane.rowIndex="2">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="225.0" minWidth="10.0" prefWidth="93.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="354.0" minWidth="10.0" prefWidth="337.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        
+                        <!-- ID, Password Field -->
+                        <TextField fx:id="loginTextField" prefHeight="45.0" promptText="Enter UserName" GridPane.columnIndex="1" />
+                        <PasswordField fx:id="loginPasswordField" prefHeight="45.0" promptText="Enter Password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <ImageView cache="true" fitHeight="70.0" fitWidth="106.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/ID_Blue.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="70.0" fitWidth="106.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../../images/Password_Blue.jpg" />
+                           </image>
+                        </ImageView>
+                        
+                        <!-- Error Message -->
+                        <Label fx:id="loginErrorMessage" textFill="#c60707" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                     </children>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets left="10.0" right="20.0" top="20.0" />
+                     </padding>
+                  </GridPane>
+                  <GridPane GridPane.rowIndex="3">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                     
+                     <!-- ID 저장 버튼 -->
+                        <CheckBox fx:id="saveUserName" mnemonicParsing="false" text="Keep UserName" >
+                           <font>
+                              <Font size="20.0" />
+                           </font></CheckBox>
+                        <Button fx:id="loginButton" mnemonicParsing="false" style="-fx-background-color: #2196f3; -fx-effect: dropshadow(three-pass-box,rgb(0,0,0,0.7),10,0,5,5);" text="Login" textFill="WHITE" GridPane.columnIndex="1">
+                           <font>
+                              <Font size="24.0" />
+                           </font></Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="50.0" left="30.0" right="30.0" />
+                     </padding>
+                  </GridPane>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@../../images/User.jpg" />
+                     </image>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </ImageView>
+               </children>
+            </GridPane>
+         </center>
+      </BorderPane>
    </children>
-</AnchorPane>
+</StackPane>

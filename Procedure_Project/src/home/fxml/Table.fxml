@@ -1,64 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controllers.TableController">
+<StackPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controllers.TableController">
    <children>
-      <AnchorPane prefHeight="150.0" prefWidth="800.0" style="-fx-background-color: #2D75E8;">
-         <children>
-            <Label layoutX="33.0" layoutY="20.0" text="Select Lecture" textFill="WHITE">
-               <font>
-                  <Font name="Arial" size="60.0" />
-               </font>
-            </Label>
-            <Label layoutX="48.0" layoutY="89.0" text="Learning Management System" textFill="WHITE">
-               <font>
-                  <Font name="Arial" size="22.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <TableView layoutX="14.0" layoutY="204.0" prefHeight="382.0" prefWidth="773.0">
-        <columns>
-          <TableColumn prefWidth="88.0" text="Number" />
-          <TableColumn prefWidth="210.0" text="Name" />
-            <TableColumn prefWidth="97.0" text="Professor" />
-            <TableColumn prefWidth="65.0" text="Credit" />
-            <TableColumn prefWidth="123.0" text="Time" />
-            <TableColumn prefWidth="95.0" text="Basket" />
-            <TableColumn prefWidth="95.0" text="Sincheong" />
-        </columns>
-      </TableView>
-      <SplitMenuButton layoutX="14.0" layoutY="166.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="106.0" text="Campus">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Seoul Campus" />
-          <MenuItem mnemonicParsing="false" text="Yongin Campus" />
-        </items>
-         <font>
-            <Font size="14.0" />
-         </font>
-      </SplitMenuButton>
-      <SplitMenuButton layoutX="127.0" layoutY="166.0" mnemonicParsing="false" text="College">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
-         <font>
-            <Font size="14.0" />
-         </font>
-      </SplitMenuButton>
-      <SplitMenuButton layoutX="235.0" layoutY="166.0" mnemonicParsing="false" text="Department">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
-         <font>
-            <Font size="14.0" />
-         </font>
-      </SplitMenuButton>
+      <BorderPane prefHeight="600.0" prefWidth="800.0">
+         <top>
+            <Pane prefHeight="150.0" style="-fx-background-color: #2d75e8;" BorderPane.alignment="CENTER">
+            	<children>
+            	<Label layoutX="48.0" layoutY="28.0" text="Select Lecture" textFill="WHITE">
+            	<font>
+              	    <Font name="Arial" size="60.0" />
+             	 </font>
+             	 </Label>
+            	<Label layoutX="61.0" layoutY="97.0" text="Learning Management System" textFill="WHITE">
+               	<font>
+                	  <Font name="Arial" size="22.0" />
+               	</font>
+            	</Label>
+         </children></Pane>
+         </top>
+         <center>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <top>
+                  <GridPane BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <SplitMenuButton mnemonicParsing="false" text="Campus">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Action 1" />
+                            <MenuItem mnemonicParsing="false" text="Action 2" />
+                          </items>
+                        </SplitMenuButton>
+                        <SplitMenuButton mnemonicParsing="false" text="College" GridPane.columnIndex="1">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Action 1" />
+                            <MenuItem mnemonicParsing="false" text="Action 2" />
+                          </items>
+                        </SplitMenuButton>
+                        <SplitMenuButton mnemonicParsing="false" text="Department" GridPane.columnIndex="2">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Action 1" />
+                            <MenuItem mnemonicParsing="false" text="Action 2" />
+                          </items>
+                        </SplitMenuButton>
+                        <TextField GridPane.columnIndex="3" />
+                        <Button mnemonicParsing="false" style="-fx-background-image: url(&quot;Images/Search.png&quot;); -fx-background-repeat: no-repeat;;" text="Button" GridPane.columnIndex="4" />
+                     </children>
+                     <BorderPane.margin>
+                        <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+                     </BorderPane.margin>
+                  </GridPane>
+               </top>
+               <center>
+                  <TableView BorderPane.alignment="CENTER">
+                    <columns>
+                      <TableColumn prefWidth="85.0" resizable="false" text="Number" />
+                      <TableColumn prefWidth="200.0" resizable="false" text="Name" />
+                        <TableColumn prefWidth="100.0" resizable="false" text="Professor" />
+                        <TableColumn prefWidth="85.0" resizable="false" text="Credit" />
+                        <TableColumn prefWidth="190.0" resizable="false" text="Time" />
+                        <TableColumn prefWidth="120.0" resizable="false" text="Basket" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                     </padding>
+                  </TableView>
+               </center>
+            </BorderPane>
+         </center></BorderPane>
    </children>
-</AnchorPane>
+</StackPane>
