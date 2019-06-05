@@ -52,14 +52,14 @@
                   </GridPane>
                </top>
                <center>
-                  <TableView BorderPane.alignment="CENTER">
+                  <TableView fx:id="lectureTable" BorderPane.alignment="CENTER">
                     <columns>
-                      <TableColumn prefWidth="85.0" resizable="false" text="Number" />
-                      <TableColumn prefWidth="200.0" resizable="false" text="Name" />
-                        <TableColumn prefWidth="100.0" resizable="false" text="Professor" />
-                        <TableColumn prefWidth="85.0" resizable="false" text="Credit" />
-                        <TableColumn prefWidth="190.0" resizable="false" text="Time" />
-                        <TableColumn prefWidth="120.0" resizable="false" text="Basket" />
+                      <TableColumn fx:id="numberColumn" prefWidth="85.0" resizable="false" text="Number" />
+                      <TableColumn fx:id="nameColumn" prefWidth="200.0" resizable="false" text="Name" />
+                      <TableColumn fx:id="professorColumn" prefWidth="100.0" resizable="false" text="Professor" />
+                      <TableColumn fx:id="creditColumn" prefWidth="85.0" resizable="false" text="Credit" />
+                      <TableColumn fx:id="timeColumn" prefWidth="190.0" resizable="false" text="Time" />
+                      <TableColumn prefWidth="120.0" resizable="false" text="Basket" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
