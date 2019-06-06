@@ -12,6 +12,14 @@ public class LectureModel {
 	private final IntegerProperty credit;
 	private final StringProperty time;
 	
+	public LectureModel() {
+		this.number = new SimpleIntegerProperty();
+		this.name = new SimpleStringProperty();
+		this.professor = new SimpleStringProperty();
+		this.credit = new SimpleIntegerProperty();
+		this.time = new SimpleStringProperty();
+	}
+	
 	public LectureModel(int number, String name, String professor, int credit, String time) {
 		this.number = new SimpleIntegerProperty(number);
 		this.name = new SimpleStringProperty(name);

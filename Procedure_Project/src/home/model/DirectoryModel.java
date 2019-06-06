@@ -1,40 +1,27 @@
 package home.model;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
+import java.util.Scanner;
 
 public class DirectoryModel {
-	private SimpleIntegerProperty number;
-	private SimpleStringProperty name;
-	private SimpleStringProperty hyperLink;
+	private int number;
+	private String name;
+	private String hyperLink;
 	
-	public DirectoryModel(int number, String name, String hyperLink) {
-		this.number = new SimpleIntegerProperty(number);
-		this.name = new SimpleStringProperty(name);
-		this.hyperLink = new SimpleStringProperty(hyperLink);
+	public void read(Scanner scanner) {
+		this.number = scanner.nextInt();
+		this.name = scanner.next();
+		this.hyperLink = scanner.next();
 	}
 	
 	public int getNumber() {
-		return number.get();
-	}
-	
-	public void setNumber(int number) {
-		this.number = new SimpleIntegerProperty(number);
+		return this.number;
 	}
 	
 	public String getName() {
-		return name.get();
-	}
-	
-	public void setName(String name) {
-		this.name = new SimpleStringProperty(name);
+		return this.name;
 	}
 	
 	public String getHyperLink() {
-		return hyperLink.get();
-	}
-	
-	public void setProfessor(String hyperLink) {
-		this.hyperLink = new SimpleStringProperty(hyperLink);
+		return this.hyperLink;
 	}
 }
