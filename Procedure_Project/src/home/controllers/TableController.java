@@ -28,11 +28,21 @@ public class TableController implements Initializable{
 	@FXML ListView<String> departmentList;
 	
 	private Vector<DirectoryModel> directoryModels;
+	private ObservableList<String> listItems;
 	
 	private ObservableList<String> campusListItems;
 	private ObservableList<String> collegeListItems;
 	private ObservableList<String> departmentListItems;
-		
+	
+	private String path= "";
+	private String campusPath = "";
+	private String collegePath = "";
+	private String departmentPath = "";
+	
+	private Boolean campusCheck = false;
+	private Boolean collegeCheck = false;
+	private Boolean departmentCheck = false;
+	
 	// Lecture
 	@FXML TableView<LectureModel> lectureTable;
 	
@@ -46,12 +56,14 @@ public class TableController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// Directory Part
+		this.listItems = FXCollections.observableArrayList();
 		this.campusListItems = FXCollections.observableArrayList();
 		this.collegeListItems = FXCollections.observableArrayList();
 		this.departmentListItems = FXCollections.observableArrayList();
 		
+		String startPath = "root";
 		try {
-			this.getCampusDirectory("root");
+			this.getDirectory(startPath);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -59,49 +71,63 @@ public class TableController implements Initializable{
 		this.campusDirectory();
 		this.collegeDirectory();
 		this.departmentDirectory();
+
 		
 		// Lecture Part
 		//loadLecture();
 	}
 
 	// Directory Methods
-	
 	private void campusDirectory() {
+		this.campusListItems = this.listItems;
 		this.campusList.setItems(this.campusListItems);
 		this.campusList.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number campusValue) {
+				// TODO Auto-generated method stub
 				try {
-					refresh(campusValue.intValue(),"Campus");
+					refresh(campusValue.intValue(),"CAMPUS");
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}
 			}
 		});
+		System.out.println("[[[Campus On]]]");
 	}
 	
 	private void collegeDirectory() {
-		this.collegeList.setItems(this.collegeListItems);
+		this.collegeListItems = this.listItems;
+		this.collegeList.setItems(this.collegeListItems);			
 		this.collegeList.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number collegeValue) {
+				// TODO Auto-generated method stub
 				try {
-					refresh(collegeValue.intValue(),"College");
+					refresh(collegeValue.intValue(),"COLLEGE");
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}
 			}
 		});
+		System.out.println("[[[College On]]]");
 	}
 	
 	private void departmentDirectory() {
+		this.departmentListItems = this.listItems;
 		this.departmentList.setItems(this.departmentListItems);
 		this.departmentList.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number departmentValue) {
-				loadLecture();
+				// TODO Auto-generated method stub
+				try {
+					refresh(departmentValue.intValue(),"DEPARTMENT");
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
+		System.out.println("[[[Department On]]]");
 	}
 	
 	// File Read with Scanner
@@ -120,37 +146,13 @@ public class TableController implements Initializable{
 	}
 	
 	// Add items to ListItems
-	private String getCampusDirectory(String fileName) throws FileNotFoundException {
+	private String getDirectory(String fileName) throws FileNotFoundException {
 		this.directoryModels = this.getDataFile("data/"+fileName);
 				
-		this.campusListItems.clear();
+		this.listItems.clear();
 		
 		for(DirectoryModel directoryModel: directoryModels) {
-			this.campusListItems.add(directoryModel.getName());
-		}
-		
-		return this.directoryModels.get(0).getHyperLink();
-	}
-	
-	private String getCollegeDirectory(String fileName) throws FileNotFoundException {
-		this.directoryModels = this.getDataFile("data/"+fileName);
-				
-		this.collegeListItems.clear();
-		
-		for(DirectoryModel directoryModel: directoryModels) {
-			this.collegeListItems.add(directoryModel.getName());
-		}
-		
-		return this.directoryModels.get(0).getHyperLink();
-	}
-	
-	private String getDepartmentDirectory(String fileName) throws FileNotFoundException {
-		this.directoryModels = this.getDataFile("data/"+fileName);
-				
-		this.departmentListItems.clear();
-		
-		for(DirectoryModel directoryModel: directoryModels) {
-			this.departmentListItems.add(directoryModel.getName());
+			this.listItems.add(directoryModel.getName());
 		}
 		
 		return this.directoryModels.get(0).getHyperLink();
@@ -159,17 +161,36 @@ public class TableController implements Initializable{
 	// Get SelectedIndex from ChangeValue && Change Directory
 	private void refresh(Object source, String path) throws FileNotFoundException {
 		int item = (int)source;
+		this.path = path;
 		String hyperLink = this.directoryModels.get(item).getHyperLink();
-		if(path=="Campus") {
-			this.getCollegeDirectory(hyperLink);
-			this.getDepartmentDirectory(hyperLink);
-		} else if(path=="College") {
-			this.getDepartmentDirectory(hyperLink);
+		
+		if(path=="CAMPUS") {
+			this.campusPath = hyperLink;
+			this.collegePath = "";
+			this.departmentPath = "";
+			
+			this.getDirectory(this.campusPath);
+			this.collegeDirectory();
+		} else if(path=="COLLEGE") {
+			this.collegePath = hyperLink;
+			this.departmentPath = "";
+			
+			this.getDirectory(this.collegePath);
+			this.departmentDirectory();
+		} else if(path=="DEPARTMENT") {
+			this.departmentPath = hyperLink;
+			this.loadLecture();
 		} else {
-			System.out.println("Error");		
+			System.out.println("ERROR");
 		}
+		
 		System.out.println("Method : "+hyperLink);
+		System.out.println("Path : "+path);
+		System.out.println("Campus : "+this.campusPath);
+		System.out.println("College : "+this.collegePath);
+		System.out.println("Department : "+this.departmentPath);
 	}
+	
 	
 	// Lecture Methods
 	private ObservableList<LectureModel> lectureModel = FXCollections.observableArrayList(
