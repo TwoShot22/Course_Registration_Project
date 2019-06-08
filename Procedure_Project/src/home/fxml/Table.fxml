@@ -31,12 +31,12 @@
                <center>
                   <TableView fx:id="lectureTable" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
                     <columns>
-                      <TableColumn fx:id="numberColumn"  style="-fx-alignment:CENTER;" maxWidth="3300.0" minWidth="-1.0" prefWidth="-1.0" text="Number" />
-                      <TableColumn fx:id="nameColumn" maxWidth="6000.0" minWidth="-1.0" prefWidth="-1.0" text="Name" />
-                      <TableColumn fx:id="professorColumn" style="-fx-alignment:CENTER;" maxWidth="4000.0" minWidth="-1.0" prefWidth="-1.0" text="Professor" />
-                      <TableColumn fx:id="creditColumn" style="-fx-alignment:CENTER;" maxWidth="2800.0" minWidth="-1.0" prefWidth="-1.0" sortType="DESCENDING" text="Credit" />
+                      <TableColumn fx:id="numberColumn" maxWidth="3300.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment:CENTER;" text="Number" />
+                      <TableColumn fx:id="nameColumn" maxWidth="6000.0" minWidth="-1.0" prefWidth="-1.0"  text="Name" />
+                      <TableColumn fx:id="professorColumn" maxWidth="4000.0" minWidth="-1.0" prefWidth="-1.0"  text="Professor" />
+                      <TableColumn fx:id="creditColumn" maxWidth="2800.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment:CENTER;" text="Credit" />
                       <TableColumn fx:id="timeColumn" maxWidth="5500.0" minWidth="-1.0" prefWidth="-1.0" text="Time" />
-                      <TableColumn maxWidth="3500.0" minWidth="-1.0" prefWidth="-1.0" text="Basket" />
+                      <TableColumn fx:id ="basketColumn" maxWidth="3500.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment:CENTER;" text="Basket" />
                     </columns>
                      <padding>
                         <Insets bottom="10.0" left="5.0" right="5.0" />
@@ -53,8 +53,8 @@
                   <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
                     <columnConstraints>
                       <ColumnConstraints halignment="CENTER" />
-                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="610.0" minWidth="10.0" prefWidth="300.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="340.0" minWidth="10.0" prefWidth="80.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="340.0" minWidth="10.0" prefWidth="180.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="340.0" minWidth="10.0" prefWidth="180.0" />
                         <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="340.0" minWidth="10.0" prefWidth="150.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="340.0" minWidth="10.0" prefWidth="70.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="340.0" minWidth="10.0" prefWidth="70.0" />
@@ -63,57 +63,21 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField prefHeight="33.0" prefWidth="299.0" GridPane.columnIndex="1" />
-                        <Button fx:id="lectureSearch" mnemonicParsing="false" prefHeight="33.0" prefWidth="65.0" style="-fx-graphic: url('images/Search.png'); -fx-background-color:transparent" textAlignment="CENTER" GridPane.columnIndex="2" />
                         <Button fx:id="confirmSelect" mnemonicParsing="false" style="-fx-graphic: url('images/Yes_Blue.png'); -fx-background-color:transparent" GridPane.columnIndex="4" />
                         <Button fx:id="cancelSelect" mnemonicParsing="false" style="-fx-graphic: url('images/No_Blue.png'); -fx-background-color:transparent" GridPane.columnIndex="5" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="128.0" text="Search" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                           <font>
-                              <Font size="21.0" />
-                           </font></Label>
                         <Label text="Confirm" textAlignment="CENTER" GridPane.columnIndex="3">
                            <font>
                               <Font size="21.0" />
                            </font></Label>
+                        <ComboBox fx:id = "campusList" prefWidth="150.0" promptText="Campus" />
+                        <ComboBox fx:id = "collegeList" prefWidth="150.0" promptText="College" GridPane.columnIndex="1" />
+                        <ComboBox fx:id = "departmentList" prefWidth="150.0" promptText="Department" GridPane.columnIndex="2" />
                      </children>
                      <padding>
-                        <Insets bottom="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="5.0" top="5.0" />
                      </padding>
                   </GridPane>
                </top>
-               <left>
-                  <GridPane gridLinesVisible="true" BorderPane.alignment="CENTER">
-                    <columnConstraints>
-                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="91.0" minHeight="10.0" prefHeight="91.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Label text="Campus" />
-                        <Label text="College" GridPane.rowIndex="2" />
-                        <Label text="Department" GridPane.rowIndex="4">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <ListView fx:id="campusList" GridPane.rowIndex="1" />
-                        <ListView fx:id="collegeList" GridPane.rowIndex="3" />
-                        <ListView fx:id="departmentList" GridPane.rowIndex="5" />
-                     </children>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </GridPane>
-               </left>
             </BorderPane>
          </center>
          <left>
