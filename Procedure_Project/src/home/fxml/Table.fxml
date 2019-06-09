@@ -11,9 +11,8 @@
 
 <StackPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controllers.TableController">
    <children>
-      
-      <!-- 상단 Label -->
       <BorderPane prefHeight="600.0" prefWidth="800.0">
+      <!-- 상단 Label -->
          <top>
             <Pane prefHeight="150.0" style="-fx-background-color: #2d75e8;" BorderPane.alignment="CENTER">
             	<children>
@@ -80,7 +79,6 @@
                       <TableColumn fx:id="professorColumn" maxWidth="4000.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment:CENTER;" text="Professor" />
                       <TableColumn fx:id="creditColumn" maxWidth="2800.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment:CENTER;" text="Credit" />
                       <TableColumn fx:id="timeColumn" maxWidth="5500.0" minWidth="-1.0" prefWidth="-1.0" text="Time" />
-                      <TableColumn fx:id="basketColumn" maxWidth="3500.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment:CENTER;" text="Basket" />
                     </columns>
                      <padding>
                         <Insets bottom="10.0" left="5.0" right="5.0" />
@@ -109,14 +107,14 @@
               </rowConstraints>
                <children>
                   <!-- Setting 버튼 -->
-                  <Button mnemonicParsing="false" style="-fx-graphic: url('images/Setting_Blue.png'); -fx-background-color:transparent" GridPane.rowIndex="2">
+                  <Button fx:id ="settingMove" mnemonicParsing="false" style="-fx-graphic: url('images/Setting_Blue.png'); -fx-background-color:transparent" GridPane.rowIndex="2">
                   </Button>
                   
                   <!-- Basket 이동 버튼 -->
-                  <Button mnemonicParsing="false" style="-fx-graphic: url('images/Basket_Blue.png'); -fx-background-color:transparent" GridPane.rowIndex="0" />
+                  <Button fx:id ="basketMove" mnemonicParsing="false" style="-fx-graphic: url('images/Basket_Blue.png'); -fx-background-color:transparent" GridPane.rowIndex="0" />
                   
                   <!-- User Information 버튼 -->
-                  <Button mnemonicParsing="false" style="-fx-graphic:url('images/ID_Blue.png'); -fx-background-color:transparent" GridPane.rowIndex="1" />
+                  <Button fx:id="userMove" mnemonicParsing="false" style="-fx-graphic:url('images/ID_Blue.png'); -fx-background-color:transparent" GridPane.rowIndex="1" />
                </children>
                <padding>
                   <Insets bottom="200.0" top="10.0" />

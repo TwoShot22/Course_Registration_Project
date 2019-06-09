@@ -1,5 +1,6 @@
 package home.controllers;
 
+import home.controllers.MainController;
 import home.model.DirectoryModel;
 import home.model.LectureModel;
 
@@ -16,6 +17,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,8 +25,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 public class TableController implements Initializable{	
@@ -48,7 +48,6 @@ public class TableController implements Initializable{
 	@FXML TableColumn<LectureModel, String> professorColumn;
 	@FXML TableColumn<LectureModel, Integer> creditColumn;
 	@FXML TableColumn<LectureModel, String> timeColumn;
-	@FXML TableColumn<LectureModel, Button> basketColumn;
 	
 	private Vector<LectureModel> lectureModels;
 	ObservableList<LectureModel> lectureList = FXCollections.observableArrayList();
@@ -59,7 +58,15 @@ public class TableController implements Initializable{
 	@FXML Button confirmButton;
 	@FXML Button cancelButton;
 	
+	@FXML Button basketMove;
+	@FXML Button userMove;
+	@FXML Button settingMove;
 	
+	private MainController controller;
+	
+	public TableController() {
+		this.controller = new MainController();
+	}
 	
 	// Initialize Methods
 	@Override
@@ -109,8 +116,16 @@ public class TableController implements Initializable{
 				lectureTable.getSelectionModel().clearSelection();
 			}
 		});
+		
+		basketMove.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				handleBasketMoveAction(event);
+			}
+		});
 	}
-
+	
 	// Directory Methods
 	private void campusDirectory() {
 		campusListItems = listItems;
@@ -222,6 +237,10 @@ public class TableController implements Initializable{
 			lectureTable.getItems().add(new LectureModel(new SimpleIntegerProperty(lectureModel.getNumber()), new SimpleStringProperty(lectureModel.getName()), 
 					new SimpleStringProperty(lectureModel.getProfessor()), new SimpleIntegerProperty(lectureModel.getCredit()), new SimpleStringProperty(lectureModel.getTime())));
 		}
-
+	}
+	
+	public void handleBasketMoveAction(ActionEvent event) {
+		this.controller.loadStage("src/home/fxml/Basket.fxml");
+		basketMove.getScene().getWindow();
 	}
 }
