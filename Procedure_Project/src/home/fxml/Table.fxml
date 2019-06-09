@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?language javascript?>
 <?import javafx.scene.effect.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
@@ -7,7 +8,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<?language javascript?>
 
 <StackPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controllers.TableController">
    <children>
@@ -30,18 +30,18 @@
          <center>
             <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <center>
-                  <TableView fx:id="lectureTable"  style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
-                    <columns>
-                      <TableColumn fx:id="numberColumn" maxWidth="3300.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment:CENTER;" text="Number" />
-                      <TableColumn fx:id="nameColumn" maxWidth="6000.0" minWidth="-1.0" prefWidth="-1.0"  text="Name" />
-                      <TableColumn fx:id="professorColumn" maxWidth="4000.0" minWidth="-1.0" prefWidth="-1.0"  style = "-fx-alignment:CENTER;" text="Professor" />
-                      <TableColumn fx:id="creditColumn" maxWidth="2800.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment:CENTER;" text="Credit" />
-                      <TableColumn fx:id="timeColumn" maxWidth="5500.0" minWidth="-1.0" prefWidth="-1.0" text="Time" />
-                      <TableColumn fx:id ="basketColumn" maxWidth="3500.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment:CENTER;" text="Basket" />
-                    </columns>
+                  <TableView fx:id="lectureTable" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
                     <fx:script>
                     	lectureTable.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);
                     </fx:script>
+                    <columns>
+                      <TableColumn fx:id="numberColumn" maxWidth="3300.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment:CENTER;" text="Number" />
+                      <TableColumn fx:id="nameColumn" maxWidth="6000.0" minWidth="-1.0" prefWidth="-1.0" text="Name" />
+                      <TableColumn fx:id="professorColumn" maxWidth="4000.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment:CENTER;" text="Professor" />
+                      <TableColumn fx:id="creditColumn" maxWidth="2800.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment:CENTER;" text="Credit" />
+                      <TableColumn fx:id="timeColumn" maxWidth="5500.0" minWidth="-1.0" prefWidth="-1.0" text="Time" />
+                      <TableColumn fx:id="basketColumn" maxWidth="3500.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment:CENTER;" text="Basket" />
+                    </columns>
                      <padding>
                         <Insets bottom="10.0" left="5.0" right="5.0" />
                      </padding>
@@ -67,15 +67,15 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="confirmSelect" mnemonicParsing="false" style="-fx-graphic: url('images/Yes_Blue.png'); -fx-background-color:transparent" GridPane.columnIndex="4" />
-                        <Button fx:id="cancelSelect" mnemonicParsing="false" style="-fx-graphic: url('images/No_Blue.png'); -fx-background-color:transparent" GridPane.columnIndex="5" />
+                        <Button fx:id="confirmButton" mnemonicParsing="false" style="-fx-graphic: url('images/Yes_Blue.png'); -fx-background-color:transparent" GridPane.columnIndex="4" />
+                        <Button fx:id="cancelButton" mnemonicParsing="false" style="-fx-graphic: url('images/No_Blue.png'); -fx-background-color:transparent" GridPane.columnIndex="5" />
                         <Label text="Confirm" textAlignment="CENTER" GridPane.columnIndex="3">
                            <font>
                               <Font size="21.0" />
                            </font></Label>
-                        <ComboBox fx:id = "campusList" prefWidth="150.0" promptText="Campus" />
-                        <ComboBox fx:id = "collegeList" prefWidth="150.0" promptText="College" GridPane.columnIndex="1" />
-                        <ComboBox fx:id = "departmentList" prefWidth="150.0" promptText="Department" GridPane.columnIndex="2" />
+                        <ComboBox fx:id="campusList" prefWidth="150.0" promptText="Campus" />
+                        <ComboBox fx:id="collegeList" prefWidth="150.0" promptText="College" GridPane.columnIndex="1" />
+                        <ComboBox fx:id="departmentList" prefWidth="150.0" promptText="Department" GridPane.columnIndex="2" />
                      </children>
                      <padding>
                         <Insets bottom="5.0" left="5.0" top="5.0" />
@@ -104,6 +104,27 @@
                   <Insets bottom="200.0" top="10.0" />
                </padding>
             </GridPane>
-         </left></BorderPane>
+         </left>
+         <bottom>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextField fx:id="numberField" />
+                  <TextField fx:id="nameField" GridPane.columnIndex="1" />
+                  <TextField fx:id="professorField" GridPane.columnIndex="2" />
+                  <TextField fx:id="creditField" GridPane.columnIndex="3" />
+                  <TextField fx:id="timeField" GridPane.columnIndex="4" />
+               </children>
+            </GridPane>
+         </bottom></BorderPane>
    </children>
 </StackPane>

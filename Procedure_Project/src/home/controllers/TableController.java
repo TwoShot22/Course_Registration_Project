@@ -10,17 +10,22 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.Vector;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 public class TableController implements Initializable{	
 	// Directory
@@ -47,21 +52,29 @@ public class TableController implements Initializable{
 	
 	private Vector<LectureModel> lectureModels;
 	
+	ObservableList<LectureModel> lectureList = FXCollections.observableArrayList(
+			new LectureModel(new SimpleIntegerProperty(5252), new SimpleStringProperty("절차적사고와프로그래밍"),new SimpleStringProperty("최성운"),new SimpleIntegerProperty(3),new SimpleStringProperty("월수9:00-10:30")),
+			new LectureModel(new SimpleIntegerProperty(4342), new SimpleStringProperty("객체지향적프로그래밍"),new SimpleStringProperty("조은주"),new SimpleIntegerProperty(3),new SimpleStringProperty("화목14:00-15:30"))
+	);
+	
 	// Button
-	@FXML
-	private void confirmSelect() {
-		TableController tableController = new TableController();
-		
-	}
+	@FXML Button confirmButton;
+	@FXML Button cancelButton;
+	
+	@FXML TextField numberField;
+	@FXML TextField	nameField;
+	@FXML TextField professorField;
+	@FXML TextField creditField;
+	@FXML TextField timeField;
 	
 	// Initialize Methods
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// Directory Part
-		this.listItems = FXCollections.observableArrayList();
-		this.campusListItems = FXCollections.observableArrayList();
-		this.collegeListItems = FXCollections.observableArrayList();
-		this.departmentListItems = FXCollections.observableArrayList();
+		listItems = FXCollections.observableArrayList();
+		campusListItems = FXCollections.observableArrayList();
+		collegeListItems = FXCollections.observableArrayList();
+		departmentListItems = FXCollections.observableArrayList();
 		
 		String startPath = "root";
 		try {
@@ -70,20 +83,40 @@ public class TableController implements Initializable{
 			e.printStackTrace();
 		}
 		
-		this.campusDirectory();
-		this.collegeDirectory();
-		this.departmentDirectory();
+		campusDirectory();
+		collegeDirectory();
+		departmentDirectory();
 
 		// Lecture Part
-		initializeTable();
-		loadLecture();
+		numberColumn.setCellValueFactory(cellData->cellData.getValue().numberProperty().asObject());
+		nameColumn.setCellValueFactory(cellData->cellData.getValue().nameProperty());
+		professorColumn.setCellValueFactory(cellData->cellData.getValue().professorProperty());
+		creditColumn.setCellValueFactory(cellData->cellData.getValue().creditProperty().asObject());
+		timeColumn.setCellValueFactory(cellData->cellData.getValue().timeProperty());
+		
+		lectureTable.setItems(lectureList);
+		
+		confirmButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				lectureTable.getItems().add(new LectureModel(new SimpleIntegerProperty(Integer.parseInt(numberField.getText())), new SimpleStringProperty(nameField.getText()), 
+						new SimpleStringProperty(professorField.getText()), new SimpleIntegerProperty(Integer.parseInt(creditField.getText())), new SimpleStringProperty(timeField.getText())));
+			}
+		});
+		
+		cancelButton.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent arg0) {
+				lectureTable.getSelectionModel().clearSelection();
+			}
+		});
 	}
 
 	// Directory Methods
 	private void campusDirectory() {
-		this.campusListItems = this.listItems;
-		this.campusList.setItems(this.campusListItems);
-		this.campusList.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+		campusListItems = listItems;
+		campusList.setItems(campusListItems);
+		campusList.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number campusValue) {
 				try {
@@ -97,9 +130,9 @@ public class TableController implements Initializable{
 	}
 	
 	private void collegeDirectory() {
-		this.collegeListItems = this.listItems;
-		this.collegeList.setItems(this.collegeListItems);
-		this.collegeList.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+		collegeListItems = listItems;
+		collegeList.setItems(collegeListItems);
+		collegeList.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number collegeValue) {
 				try {
@@ -113,9 +146,9 @@ public class TableController implements Initializable{
 	}
 	
 	private void departmentDirectory() {
-		this.departmentListItems = this.listItems;
-		this.departmentList.setItems(this.departmentListItems);
-		this.departmentList.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+		departmentListItems = listItems;
+		departmentList.setItems(departmentListItems);
+		departmentList.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number departmentValue) {
 				try {
@@ -145,60 +178,27 @@ public class TableController implements Initializable{
 	
 	// Add items to ListItems
 	private String getDirectory(String fileName) throws FileNotFoundException {		
-		this.directoryModels = this.getDataFile("data/"+fileName);
+		directoryModels = getDataFile("data/"+fileName);
 		
-		for(int i=0;i<listItems.size();i++) {
-			listItems.remove(i);
-		}
-		
-		if(listItems.size()==0) {
-			System.out.println("remove success");
-		}
+		listItems.clear();
 		
 		for(DirectoryModel directoryModel: directoryModels) {
 			listItems.add(directoryModel.getName());
 		}
 		
-		return this.directoryModels.get(0).getHyperLink();
+		return directoryModels.get(0).getHyperLink();
 	}
 	
 	// Get SelectedIndex from ChangeValue && Change Directory
 	private void refresh(Object source) throws FileNotFoundException {
 		int item = (int)source;
-		String hyperLink = this.directoryModels.get(item).getHyperLink();
-		System.out.println(hyperLink);
-		// this.getDirectory(hyperLink);
+		String Link = this.directoryModels.get(item).getHyperLink();
+		System.out.println(Link);
+		getDirectory(Link);
 	}
 	
 	
-	// Lecture Methods
-	private ObservableList<LectureModel> lectureModel = FXCollections.observableArrayList(
-			// Dummy Data
-			new LectureModel(3214,"객체지향적사고와프로그래밍","최성운",3,"월수9:00-10:30",new Button("GET")),
-			new LectureModel(3216,"시스템프로그래밍","김일주",3,"화목14:00-15:30",new Button("GET"))
-	);
-	
-	
-	private void initializeTable() {
-		this.numberColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
-		this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-		this.professorColumn.setCellValueFactory(new PropertyValueFactory<>("professor"));
-		this.creditColumn.setCellValueFactory(new PropertyValueFactory<>("credit"));
-		this.timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
-		this.basketColumn.setCellValueFactory(new PropertyValueFactory<>("button"));
-	}
-	
-	private void loadLecture() {
-		this.numberColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
-		this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-		this.professorColumn.setCellValueFactory(new PropertyValueFactory<>("professor"));
-		this.creditColumn.setCellValueFactory(new PropertyValueFactory<>("credit"));
-		this.timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
-		this.basketColumn.setCellValueFactory(new PropertyValueFactory<>("button"));
-		
-		this.lectureTable.setItems(lectureModel);
-	}
-	
+	// Lecture Methods	
 	private Vector<LectureModel> getLectureData(String fileName) throws FileNotFoundException{
 		lectureModels = new Vector<LectureModel>();
 		
