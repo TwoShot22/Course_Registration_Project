@@ -194,7 +194,7 @@ public class TableController implements Initializable{
 	
 	// Lecture Methods	
 	
-	/* private Vector<LectureModel> getLectureData(String fileName) throws FileNotFoundException{
+	private Vector<LectureModel> getLectureData(String fileName) throws FileNotFoundException{
 		lectureModels = new Vector<LectureModel>();
 
 		Scanner scanner = new Scanner(new File(fileName));
@@ -218,5 +218,5 @@ public class TableController implements Initializable{
 		}
 		
 		return lectureModels.get(0).getHyperLink();
-	} */
+	}
 }
