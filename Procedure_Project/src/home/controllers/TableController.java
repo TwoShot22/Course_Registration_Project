@@ -51,15 +51,15 @@ public class TableController implements Initializable{
 	@FXML TableColumn<LectureModel, Button> basketColumn;
 	
 	private Vector<LectureModel> lectureModels;
+	ObservableList<LectureModel> lectureList = FXCollections.observableArrayList();
 	
-	ObservableList<LectureModel> lectureList = FXCollections.observableArrayList(
-			new LectureModel(new SimpleIntegerProperty(5252), new SimpleStringProperty("절차적사고와프로그래밍"),new SimpleStringProperty("최성운"),new SimpleIntegerProperty(3),new SimpleStringProperty("월수9:00-10:30")),
-			new LectureModel(new SimpleIntegerProperty(4342), new SimpleStringProperty("객체지향적프로그래밍"),new SimpleStringProperty("조은주"),new SimpleIntegerProperty(3),new SimpleStringProperty("화목14:00-15:30"))
-	);
+	String directoryPath = " ";
 	
 	// Button
 	@FXML Button confirmButton;
 	@FXML Button cancelButton;
+	
+	
 	
 	// Initialize Methods
 	@Override
@@ -191,9 +191,9 @@ public class TableController implements Initializable{
 	// Get SelectedIndex from ChangeValue && Change Directory
 	private void refresh(Object source) throws FileNotFoundException {
 		int item = (int)source;
-		String Link = this.directoryModels.get(item).getHyperLink();
-		System.out.println(Link);
-		getDirectory(Link);
+		String hyperLink = this.directoryModels.get(item).getHyperLink();
+		System.out.println(hyperLink);
+		getDirectory(hyperLink);
 	}
 	
 	
@@ -222,7 +222,6 @@ public class TableController implements Initializable{
 			lectureTable.getItems().add(new LectureModel(new SimpleIntegerProperty(lectureModel.getNumber()), new SimpleStringProperty(lectureModel.getName()), 
 					new SimpleStringProperty(lectureModel.getProfessor()), new SimpleIntegerProperty(lectureModel.getCredit()), new SimpleStringProperty(lectureModel.getTime())));
 		}
-		
-		//lectureTable.setItems(lectureList);
+
 	}
 }
