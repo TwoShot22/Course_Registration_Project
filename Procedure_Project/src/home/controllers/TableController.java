@@ -61,12 +61,6 @@ public class TableController implements Initializable{
 	@FXML Button confirmButton;
 	@FXML Button cancelButton;
 	
-	@FXML TextField numberField;
-	@FXML TextField	nameField;
-	@FXML TextField professorField;
-	@FXML TextField creditField;
-	@FXML TextField timeField;
-	
 	// Initialize Methods
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -99,8 +93,8 @@ public class TableController implements Initializable{
 		confirmButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				lectureTable.getItems().add(new LectureModel(new SimpleIntegerProperty(Integer.parseInt(numberField.getText())), new SimpleStringProperty(nameField.getText()), 
-						new SimpleStringProperty(professorField.getText()), new SimpleIntegerProperty(Integer.parseInt(creditField.getText())), new SimpleStringProperty(timeField.getText())));
+				//lectureTable.getItems().add(new LectureModel(new SimpleIntegerProperty(Integer.parseInt(numberField.getText())), new SimpleStringProperty(nameField.getText()), 
+						//new SimpleStringProperty(professorField.getText()), new SimpleIntegerProperty(Integer.parseInt(creditField.getText())), new SimpleStringProperty(timeField.getText())));
 			}
 		});
 		
@@ -199,16 +193,30 @@ public class TableController implements Initializable{
 	
 	
 	// Lecture Methods	
-	private Vector<LectureModel> getLectureData(String fileName) throws FileNotFoundException{
+	
+	/* private Vector<LectureModel> getLectureData(String fileName) throws FileNotFoundException{
 		lectureModels = new Vector<LectureModel>();
-		
+
 		Scanner scanner = new Scanner(new File(fileName));
-		
+
 		while(scanner.hasNext()) {
-			//LectureModel lectureModel = new LectureModel();
-			
+			LectureModel lectureModel = new LectureModel();
+			lectureModel.read(scanner);
+			lectureModels.add(lectureModel);
+		}
+		scanner.close();
+		return lectureModels;
+	} 
+	
+	private String getLectureList(String fileName) throws FileNotFoundException {		
+		lectureModels = getLectureData("data/"+fileName);
+		
+		listItems.clear();
+		
+		for(DirectoryModel directoryModel: directoryModels) {
+			listItems.add(directoryModel.getName());
 		}
 		
-		return lectureModels;
-	}
+		return lectureModels.get(0).getHyperLink();
+	} */
 }
