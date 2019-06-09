@@ -105,6 +105,6 @@
                </padding>
             </GridPane>
          </left>
-         </BorderPane>
+        </BorderPane>
    </children>
 </StackPane>

@@ -3,23 +3,33 @@ package home.model;
 import java.util.Scanner;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Button;
 
 public class LectureModel {
-	private IntegerProperty number;
-	private StringProperty name;
-	private StringProperty professor;
-	private IntegerProperty credit;
-	private StringProperty time;
+	private final SimpleIntegerProperty number;
+	private final SimpleStringProperty name;
+	private final SimpleStringProperty professor;
+	private final SimpleIntegerProperty credit;
+	private final SimpleStringProperty time;
 	
 	private int tempNumber;
 	private String tempName;
 	private String tempProfessor;
 	private int tempCredit;
 	private String tempTime;
-			
-	public LectureModel(IntegerProperty number, StringProperty name, StringProperty professor, IntegerProperty credit, StringProperty time) {
+	
+	public LectureModel() {
+		this.number = new SimpleIntegerProperty();
+		this.name = new SimpleStringProperty();
+		this.professor = new SimpleStringProperty();
+		this.credit = new SimpleIntegerProperty();
+		this.time = new SimpleStringProperty();
+	}
+	
+	public LectureModel(SimpleIntegerProperty number, SimpleStringProperty name, SimpleStringProperty professor, SimpleIntegerProperty credit, SimpleStringProperty time) {
 		this.number = number;
 		this.name = name;
 		this.professor = professor;
@@ -41,23 +51,23 @@ public class LectureModel {
 		this.setTime(this.tempTime);
 	}
 	
-	public IntegerProperty numberProperty() {
+	public SimpleIntegerProperty numberProperty() {
 		return number;
 	}
 	
-	public StringProperty nameProperty() {
+	public SimpleStringProperty nameProperty() {
 		return name;
 	}
 	
-	public StringProperty professorProperty() {
+	public SimpleStringProperty professorProperty() {
 		return professor;
 	}
 	
-	public IntegerProperty creditProperty() {
+	public SimpleIntegerProperty creditProperty() {
 		return credit;
 	}
 	
-	public StringProperty timeProperty() {
+	public SimpleStringProperty timeProperty() {
 		return time;
 	}
 	

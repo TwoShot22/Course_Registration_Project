@@ -88,13 +88,18 @@ public class TableController implements Initializable{
 		creditColumn.setCellValueFactory(cellData->cellData.getValue().creditProperty().asObject());
 		timeColumn.setCellValueFactory(cellData->cellData.getValue().timeProperty());
 		
-		lectureTable.setItems(lectureList);
+		try {
+			getLectureList("english");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		confirmButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				//lectureTable.getItems().add(new LectureModel(new SimpleIntegerProperty(Integer.parseInt(numberField.getText())), new SimpleStringProperty(nameField.getText()), 
-						//new SimpleStringProperty(professorField.getText()), new SimpleIntegerProperty(Integer.parseInt(creditField.getText())), new SimpleStringProperty(timeField.getText())));
+					//	new SimpleStringProperty(professorField.getText()), new SimpleIntegerProperty(Integer.parseInt(creditField.getText())), new SimpleStringProperty(timeField.getText())));
 			}
 		});
 		
@@ -208,15 +213,16 @@ public class TableController implements Initializable{
 		return lectureModels;
 	} 
 	
-	private String getLectureList(String fileName) throws FileNotFoundException {		
+	private void getLectureList(String fileName) throws FileNotFoundException {		
 		lectureModels = getLectureData("data/"+fileName);
 		
-		listItems.clear();
+		lectureList.clear();
 		
-		for(DirectoryModel directoryModel: directoryModels) {
-			listItems.add(directoryModel.getName());
+		for(LectureModel lectureModel: lectureModels) {
+			lectureTable.getItems().add(new LectureModel(new SimpleIntegerProperty(lectureModel.getNumber()), new SimpleStringProperty(lectureModel.getName()), 
+					new SimpleStringProperty(lectureModel.getProfessor()), new SimpleIntegerProperty(lectureModel.getCredit()), new SimpleStringProperty(lectureModel.getTime())));
 		}
 		
-		return lectureModels.get(0).getHyperLink();
+		//lectureTable.setItems(lectureList);
 	}
 }
