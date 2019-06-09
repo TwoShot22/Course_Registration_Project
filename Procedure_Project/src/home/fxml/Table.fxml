@@ -7,6 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?language javascript?>
 
 <StackPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controllers.TableController">
    <children>
@@ -29,15 +30,18 @@
          <center>
             <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <center>
-                  <TableView fx:id="lectureTable" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
+                  <TableView fx:id="lectureTable"  style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
                     <columns>
                       <TableColumn fx:id="numberColumn" maxWidth="3300.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment:CENTER;" text="Number" />
                       <TableColumn fx:id="nameColumn" maxWidth="6000.0" minWidth="-1.0" prefWidth="-1.0"  text="Name" />
-                      <TableColumn fx:id="professorColumn" maxWidth="4000.0" minWidth="-1.0" prefWidth="-1.0"  text="Professor" />
+                      <TableColumn fx:id="professorColumn" maxWidth="4000.0" minWidth="-1.0" prefWidth="-1.0"  style = "-fx-alignment:CENTER;" text="Professor" />
                       <TableColumn fx:id="creditColumn" maxWidth="2800.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment:CENTER;" text="Credit" />
                       <TableColumn fx:id="timeColumn" maxWidth="5500.0" minWidth="-1.0" prefWidth="-1.0" text="Time" />
                       <TableColumn fx:id ="basketColumn" maxWidth="3500.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment:CENTER;" text="Basket" />
                     </columns>
+                    <fx:script>
+                    	lectureTable.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);
+                    </fx:script>
                      <padding>
                         <Insets bottom="10.0" left="5.0" right="5.0" />
                      </padding>
