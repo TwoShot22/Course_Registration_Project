@@ -135,8 +135,6 @@ public class TableController implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number departmentValue) {
 				try {
-					System.out.println("[Department]");
-					System.out.println(departmentValue.intValue());
 					departmentRefresh(departmentValue.intValue());
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
