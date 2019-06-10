@@ -47,8 +47,11 @@ public class BasketController implements Initializable{
 	@FXML Button registerDelete;
 	
 	// Data
-	private Vector<LectureModel> lectureModels;
-	ObservableList<LectureModel> lectureList = FXCollections.observableArrayList();
+	private Vector<LectureModel> basketModels;
+	ObservableList<LectureModel> basketList = FXCollections.observableArrayList();
+	
+	private Vector<LectureModel> registerModels;
+	ObservableList<LectureModel> registerList = FXCollections.observableArrayList();
 	
 	// Control Bar
 	@FXML Button lectureMove;
@@ -64,7 +67,7 @@ public class BasketController implements Initializable{
 		basketTimeColumn.setCellValueFactory(cellData->cellData.getValue().timeProperty());
 		
 		try {
-			this.getLectureList("Basket");
+			this.getBasketList("Basket");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -102,7 +105,7 @@ public class BasketController implements Initializable{
 		});
 		
 		try {
-			this.getLectureList("Register");
+			this.getRegisterList("Register");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -127,28 +130,53 @@ public class BasketController implements Initializable{
 	}
 	
 	// Load Data Method
-	private Vector<LectureModel> getLectureData(String fileName) throws FileNotFoundException{
-		lectureModels = new Vector<LectureModel>();
+	private Vector<LectureModel> getBasketData(String fileName) throws FileNotFoundException{
+		basketModels = new Vector<LectureModel>();
 
 		Scanner scanner = new Scanner(new File(fileName));
 
 		while(scanner.hasNext()) {
 			LectureModel lectureModel = new LectureModel();
 			lectureModel.read(scanner);
-			lectureModels.add(lectureModel);
+			basketModels.add(lectureModel);
 		}
 		scanner.close();
-		return lectureModels;
+		return basketModels;
 	} 
 	
-	private void getLectureList(String fileName) throws FileNotFoundException {		
-		lectureModels = getLectureData("data/user/"+fileName);
+	private void getBasketList(String fileName) throws FileNotFoundException {		
+		basketModels = getBasketData("data/user/"+fileName);
 		
-		lectureList.clear();
+		basketList.clear();
 		
-		for(LectureModel lectureModel: lectureModels) {
-			basketTable.getItems().add(new LectureModel(new SimpleIntegerProperty(lectureModel.getNumber()), new SimpleStringProperty(lectureModel.getName()), 
-					new SimpleStringProperty(lectureModel.getProfessor()), new SimpleIntegerProperty(lectureModel.getCredit()), new SimpleStringProperty(lectureModel.getTime())));
+		for(LectureModel basketModel: basketModels) {
+			basketTable.getItems().add(new LectureModel(new SimpleIntegerProperty(basketModel.getNumber()), new SimpleStringProperty(basketModel.getName()), 
+					new SimpleStringProperty(basketModel.getProfessor()), new SimpleIntegerProperty(basketModel.getCredit()), new SimpleStringProperty(basketModel.getTime())));
+		}
+	}
+	
+	private Vector<LectureModel> getRegisterData(String fileName) throws FileNotFoundException{
+		registerModels = new Vector<LectureModel>();
+
+		Scanner scanner = new Scanner(new File(fileName));
+
+		while(scanner.hasNext()) {
+			LectureModel registerModel = new LectureModel();
+			registerModel.read(scanner);
+			registerModels.add(registerModel);
+		}
+		scanner.close();
+		return registerModels;
+	} 
+	
+	private void getRegisterList(String fileName) throws FileNotFoundException {		
+		registerModels = getRegisterData("data/user/"+fileName);
+		
+		registerList.clear();
+		
+		for(LectureModel registerModel: registerModels) {
+			registerTable.getItems().add(new LectureModel(new SimpleIntegerProperty(registerModel.getNumber()), new SimpleStringProperty(registerModel.getName()), 
+					new SimpleStringProperty(registerModel.getProfessor()), new SimpleIntegerProperty(registerModel.getCredit()), new SimpleStringProperty(registerModel.getTime())));
 		}
 	}
 }

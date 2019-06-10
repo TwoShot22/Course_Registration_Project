@@ -28,17 +28,28 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 
 public class TableController implements Initializable{	
+
 	// Directory
-	@FXML ComboBox<String> campusList;
-	@FXML ComboBox<String> collegeList;
-	@FXML ComboBox<String> departmentList;
+	@FXML ComboBox<String> campusPickBox;
+	@FXML ComboBox<String> collegePickBox;
+	@FXML ComboBox<String> departmentPickBox;
 	
-	private Vector<DirectoryModel> directoryModels;
-	private ObservableList<String> listItems;
+	private Vector<DirectoryModel> campusModels;
+	private ObservableList<String> campusItems;
+	private ObservableList<String> campusList;
 	
-	private ObservableList<String> campusListItems;
-	private ObservableList<String> collegeListItems;
-	private ObservableList<String> departmentListItems;
+	private Vector<DirectoryModel> collegeModels;
+	private ObservableList<String> collegeItems;
+	private ObservableList<String> collegeList;
+	
+	private Vector<DirectoryModel> departmentModels;
+	private ObservableList<String> departmentItems;
+	private ObservableList<String> departmentList;
+	
+	private String startPath = "root";
+	private String campusPath = " ";
+	private String collegePath = " ";
+	private String departmentPath = " ";
 	
 	// Lecture
 	@FXML TableView<LectureModel> lectureTable;
@@ -51,9 +62,7 @@ public class TableController implements Initializable{
 	
 	private Vector<LectureModel> lectureModels;
 	ObservableList<LectureModel> lectureList = FXCollections.observableArrayList();
-	
-	String directoryPath = " ";
-	
+		
 	// Button
 	@FXML Button confirmButton;
 	@FXML Button cancelButton;
@@ -62,6 +71,7 @@ public class TableController implements Initializable{
 	@FXML Button userMove;
 	@FXML Button settingMove;
 	
+	// Load Basket.fxml
 	private MainController controller;
 	
 	public TableController() {
@@ -69,24 +79,28 @@ public class TableController implements Initializable{
 	}
 	
 	// Initialize Methods
-	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// Directory Part
-		listItems = FXCollections.observableArrayList();
-		campusListItems = FXCollections.observableArrayList();
-		collegeListItems = FXCollections.observableArrayList();
-		departmentListItems = FXCollections.observableArrayList();
 		
-		String startPath = "root";
+		// Directory Part
+		campusItems = FXCollections.observableArrayList();
+		campusList = FXCollections.observableArrayList();
+		
+		collegeItems = FXCollections.observableArrayList();
+		collegeList = FXCollections.observableArrayList();
+		
+		departmentItems = FXCollections.observableArrayList();
+		departmentList = FXCollections.observableArrayList();
+		
+		// Directory Search Start
 		try {
-			this.getDirectory(startPath);
+			this.getCampusHyperLink(this.startPath);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		
-		campusDirectory();
-		collegeDirectory();
-		departmentDirectory();
+		this.campusDirectory();
+		this.collegeDirectory();
+		this.departmentDirectory();
 
 		// Lecture Part
 		numberColumn.setCellValueFactory(cellData->cellData.getValue().numberProperty().asObject());
@@ -102,6 +116,7 @@ public class TableController implements Initializable{
 			e.printStackTrace();
 		}
 		
+		// »ó´Ü Progress Bar
 		confirmButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -117,6 +132,7 @@ public class TableController implements Initializable{
 			}
 		});
 		
+		// Control Bar
 		basketMove.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -128,14 +144,14 @@ public class TableController implements Initializable{
 	
 	// Directory Methods
 	private void campusDirectory() {
-		campusListItems = listItems;
-		campusList.setItems(campusListItems);
-		campusList.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+		campusList = campusItems;
+		campusPickBox.setItems(campusList);
+		campusPickBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number campusValue) {
 				try {
 					System.out.println("[Campus]");
-					refresh(campusValue.intValue());
+					campusRefresh(campusValue.intValue());
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}
@@ -144,14 +160,14 @@ public class TableController implements Initializable{
 	}
 	
 	private void collegeDirectory() {
-		collegeListItems = listItems;
-		collegeList.setItems(collegeListItems);
-		collegeList.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+		collegeList = collegeItems;
+		collegePickBox.setItems(collegeList);
+		collegePickBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number collegeValue) {
 				try {
 					System.out.println("[College]");
-					refresh(collegeValue.intValue());
+					collegeRefresh(collegeValue.intValue());
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}
@@ -160,14 +176,14 @@ public class TableController implements Initializable{
 	}
 	
 	private void departmentDirectory() {
-		departmentListItems = listItems;
-		departmentList.setItems(departmentListItems);
-		departmentList.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+		departmentList = departmentItems;
+		departmentPickBox.setItems(departmentList);
+		departmentPickBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number departmentValue) {
 				try {
 					System.out.println("[Department]");
-					refresh(departmentValue.intValue());
+					departmentRefresh(departmentValue.intValue());
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}
@@ -175,42 +191,107 @@ public class TableController implements Initializable{
 		});
 	}
 	
-	// File Read with Scanner
-	private Vector<DirectoryModel> getDataFile(String fileName) throws FileNotFoundException {
-		directoryModels = new Vector<DirectoryModel>();
+	// [Campus] File Read and Add Items
+	private Vector<DirectoryModel> getCampusData(String fileName) throws FileNotFoundException {
+		campusModels = new Vector<DirectoryModel>();
 
 		Scanner scanner = new Scanner(new File(fileName));
 
 		while(scanner.hasNext()) {
-			DirectoryModel directoryModel = new DirectoryModel();
-			directoryModel.read(scanner);
-			directoryModels.add(directoryModel);
+			DirectoryModel campusModel = new DirectoryModel();
+			campusModel.read(scanner);
+			campusModels.add(campusModel);
 		}
 		scanner.close();
-		return directoryModels;
+		return campusModels;
 	}
 	
-	// Add items to ListItems
-	private String getDirectory(String fileName) throws FileNotFoundException {		
-		directoryModels = getDataFile("data/"+fileName);
+	private String getCampusHyperLink(String fileName) throws FileNotFoundException {
+		campusModels = getCampusData("data/"+fileName);			
 		
-		listItems.clear();
+		campusItems.clear();
 		
-		for(DirectoryModel directoryModel: directoryModels) {
-			listItems.add(directoryModel.getName());
+		for(DirectoryModel campusModel: campusModels) {
+			campusItems.add(campusModel.getName());
 		}
 		
-		return directoryModels.get(0).getHyperLink();
+		return campusModels.get(0).getHyperLink();
 	}
 	
-	// Get SelectedIndex from ChangeValue && Change Directory
-	private void refresh(Object source) throws FileNotFoundException {
+	private void campusRefresh(Object source) throws FileNotFoundException {
 		int item = (int)source;
-		String hyperLink = this.directoryModels.get(item).getHyperLink();
-		System.out.println(hyperLink);
-		getDirectory(hyperLink);
+		this.campusPath = this.campusModels.get(item).getHyperLink();
+		System.out.println(this.campusPath);
+		getCampusHyperLink(this.campusPath);
 	}
 	
+	// [College] File Read and Add Items
+	private Vector<DirectoryModel> getCollegeData(String fileName) throws FileNotFoundException {
+		collegeModels = new Vector<DirectoryModel>();
+
+		Scanner scanner = new Scanner(new File(fileName));
+
+		while(scanner.hasNext()) {
+			DirectoryModel collegeModel = new DirectoryModel();
+			collegeModel.read(scanner);
+			collegeModels.add(collegeModel);
+		}
+		scanner.close();
+		return collegeModels;
+	}
+		
+	private String getCollegeHyperLink(String fileName) throws FileNotFoundException {		
+		collegeModels = getCollegeData("data/"+fileName);
+			
+		collegeItems.clear();
+			
+		for(DirectoryModel collegeModel: collegeModels) {
+			collegeItems.add(collegeModel.getName());
+		}
+			
+		return collegeModels.get(0).getHyperLink();
+	}
+		
+	private void collegeRefresh(Object source) throws FileNotFoundException {
+		int item = (int)source;
+		this.collegePath = this.collegeModels.get(item).getHyperLink();
+		System.out.println(this.collegePath);
+		getCollegeHyperLink(this.collegePath);
+	}
+		
+	// [Department] File Read and Add Items
+	private Vector<DirectoryModel> getDepartmentData(String fileName) throws FileNotFoundException {
+		departmentModels = new Vector<DirectoryModel>();
+
+		Scanner scanner = new Scanner(new File(fileName));
+
+		while(scanner.hasNext()) {
+			DirectoryModel departmentModel = new DirectoryModel();
+			departmentModel.read(scanner);
+			departmentModels.add(departmentModel);
+		}
+		scanner.close();
+		return departmentModels;
+	}
+		
+	private String getDepartmentHyperLink(String fileName) throws FileNotFoundException {		
+		departmentModels = getDepartmentData("data/"+fileName);
+			
+		departmentItems.clear();
+			
+		for(DirectoryModel departmentModel: departmentModels) {
+			departmentItems.add(departmentModel.getName());
+		}
+			
+		return departmentModels.get(0).getHyperLink();
+	}
+		
+	private void departmentRefresh(Object source) throws FileNotFoundException {
+		int item = (int)source;
+		this.departmentPath = this.departmentModels.get(item).getHyperLink();
+		System.out.println(this.departmentPath);
+		getDepartmentHyperLink(this.departmentPath);
+	}
 	
 	// Lecture Methods	
 	
@@ -239,6 +320,7 @@ public class TableController implements Initializable{
 		}
 	}
 	
+	// Control Bar Method
 	public void handleBasketMoveAction(ActionEvent event) {
 		this.controller.loadStage("src/home/fxml/Basket.fxml");
 		basketMove.getScene().getWindow();
