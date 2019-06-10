@@ -145,6 +145,10 @@ public class BasketController implements Initializable{
 	} 
 	
 	private void getBasketList(String fileName) throws FileNotFoundException {		
+		for(int i=0;i<basketTable.getItems().size();i++) {
+			basketTable.getItems().clear();
+		}
+		
 		basketModels = getBasketData("data/user/"+fileName);
 		
 		basketList.clear();
@@ -170,6 +174,10 @@ public class BasketController implements Initializable{
 	} 
 	
 	private void getRegisterList(String fileName) throws FileNotFoundException {		
+		for(int i=0;i<registerTable.getItems().size();i++) {
+			registerTable.getItems().clear();
+		}
+		
 		registerModels = getRegisterData("data/user/"+fileName);
 		
 		registerList.clear();

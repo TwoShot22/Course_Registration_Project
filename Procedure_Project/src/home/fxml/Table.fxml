@@ -54,9 +54,9 @@
                            <font>
                               <Font size="21.0" />
                            </font></Label>
-                        <ComboBox fx:id="campusList" prefWidth="150.0" promptText="Campus" />
-                        <ComboBox fx:id="collegeList" prefWidth="150.0" promptText="College" GridPane.columnIndex="1" />
-                        <ComboBox fx:id="departmentList" prefWidth="150.0" promptText="Department" GridPane.columnIndex="2" />
+                        <ComboBox fx:id="campusPickBox" prefWidth="150.0" promptText="Campus" />
+                        <ComboBox fx:id="collegePickBox" prefWidth="150.0" promptText="College" GridPane.columnIndex="1" />
+                        <ComboBox fx:id="departmentPickBox" prefWidth="150.0" promptText="Department" GridPane.columnIndex="2" />
                      </children>
                      <padding>
                         <Insets bottom="5.0" left="5.0" top="5.0" />
