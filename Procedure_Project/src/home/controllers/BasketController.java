@@ -20,8 +20,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class BasketController implements Initializable{
+	private MainController controller;
+	
 	// Basket
 	@FXML TableView<LectureModel> basketTable;
 	
@@ -57,6 +60,10 @@ public class BasketController implements Initializable{
 	@FXML Button lectureMove;
 	@FXML Button userMove;
 	@FXML Button settingMove;
+	
+	public BasketController() {
+		this.controller = new MainController();
+	}
 	
 	public void initialize(URL location, ResourceBundle resources) {
 		// Basket
@@ -124,7 +131,7 @@ public class BasketController implements Initializable{
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
-				
+				handleLectureMoveAction(event);
 			}
 		});
 	}
@@ -187,4 +194,11 @@ public class BasketController implements Initializable{
 					new SimpleStringProperty(registerModel.getProfessor()), new SimpleIntegerProperty(registerModel.getCredit()), new SimpleStringProperty(registerModel.getTime())));
 		}
 	}
+	
+	// Control Bar Method
+		public void handleLectureMoveAction(ActionEvent event) {
+			this.controller.loadStage("src/home/fxml/Table.fxml");
+			Stage basket = (Stage)lectureMove.getScene().getWindow();
+			basket.close();
+		}
 }

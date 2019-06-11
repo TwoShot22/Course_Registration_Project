@@ -1,16 +1,16 @@
 package home.controllers;
 
-import home.controllers.MainController;
-import home.model.DirectoryModel;
-import home.model.LectureModel;
-
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.Vector;
 
+import home.model.DirectoryModel;
+import home.model.LectureModel;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -26,6 +26,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class TableController implements Initializable{	
 
@@ -330,6 +331,7 @@ public class TableController implements Initializable{
 	// Control Bar Method
 	public void handleBasketMoveAction(ActionEvent event) {
 		this.controller.loadStage("src/home/fxml/Basket.fxml");
-		basketMove.getScene().getWindow();
+		Stage lecture = (Stage)basketMove.getScene().getWindow();
+		lecture.close();
 	}
 }
