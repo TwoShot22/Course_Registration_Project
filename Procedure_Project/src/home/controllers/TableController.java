@@ -198,7 +198,7 @@ public class TableController implements Initializable{
 		confirmButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				//System.out.println(pickedItems);
+
 			}
 		});
 		
