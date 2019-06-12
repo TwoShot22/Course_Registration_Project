@@ -117,7 +117,7 @@ public class LoginController implements Initializable {
 			loginCheck = this.authenticate(inputID, inputPassword);
 					
 			if(loginCheck) {
-				this.controller.loadStage("src/home/fxml/Table.fxml");
+				this.controller.loadStage("src/home/fxml/Table.fxml","명지대학교 수강신청 시스템");
 				Stage login = (Stage)loginButton.getScene().getWindow();
 				login.close();
 			} else {

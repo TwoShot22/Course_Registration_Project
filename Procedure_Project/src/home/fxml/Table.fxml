@@ -14,7 +14,7 @@
       <BorderPane prefHeight="600.0" prefWidth="800.0">
       <!-- 상단 Label -->
          <top>
-            <Pane prefHeight="150.0" style="-fx-background-color: #2d75e8;" BorderPane.alignment="CENTER">
+            <Pane prefHeight="150.0" style="-fx-background-color: #646465;" BorderPane.alignment="CENTER">
             	<children>
             	<Label layoutX="48.0" layoutY="28.0" text="Select Lecture" textFill="WHITE">
             	<font>
@@ -48,8 +48,8 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="confirmButton" mnemonicParsing="false" style="-fx-graphic: url('images/Yes_Blue.png'); -fx-background-color:transparent" GridPane.columnIndex="4" />
-                        <Button fx:id="cancelButton" mnemonicParsing="false" style="-fx-graphic: url('images/No_Blue.png'); -fx-background-color:transparent" GridPane.columnIndex="5" />
+                        <Button fx:id="confirmButton" mnemonicParsing="false" style="-fx-graphic: url('images/Lecture_Yes_White.png'); -fx-background-color:transparent" GridPane.columnIndex="4" />
+                        <Button fx:id="cancelButton" mnemonicParsing="false" style="-fx-graphic: url('images/No_White.png'); -fx-background-color:transparent" GridPane.columnIndex="5" />
                         <Label text="Confirm" textAlignment="CENTER" GridPane.columnIndex="3">
                            <font>
                               <Font size="21.0" />
@@ -66,12 +66,7 @@
                
                <center>
                   <TableView fx:id="lectureTable" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
-                    
-                    <!-- Multiple Select JavaScript Code -->
-                    <fx:script>
-                    	lectureTable.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);
-                    </fx:script> 
-                    
+                   
                     <!-- TableView Column -->
                     <columns>
                       <TableColumn fx:id="numberColumn" maxWidth="3300.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment:CENTER;" text="Number" />
@@ -96,7 +91,7 @@
          
          <!-- 좌측 Control Bar -->
          <left>
-            <GridPane style="-fx-background-color: #c8c9c8;" BorderPane.alignment="CENTER">
+            <GridPane style="-fx-background-color: #a0a0a1;" BorderPane.alignment="CENTER">
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
               </columnConstraints>
@@ -106,15 +101,15 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <!-- Setting 버튼 -->
-                  <Button fx:id="settingMove" mnemonicParsing="false" style="-fx-graphic: url('images/Setting_Blue.png'); -fx-background-color:transparent" GridPane.rowIndex="2">
+                  <!-- Logout 버튼 -->
+                  <Button fx:id="loginMove" mnemonicParsing="false" style="-fx-graphic: url('images/Logout_White.png'); -fx-background-color:transparent" GridPane.rowIndex="2">
                   </Button>
                   
                   <!-- Basket 이동 버튼 -->
-                  <Button fx:id="basketMove" mnemonicParsing="false" style="-fx-graphic: url('images/Basket_Blue.png'); -fx-background-color:transparent" GridPane.rowIndex="0" />
+                  <Button fx:id="basketMove" mnemonicParsing="false" style="-fx-graphic: url('images/Basket_White.png'); -fx-background-color:transparent" GridPane.rowIndex="0" />
                   
                   <!-- User Information 버튼 -->
-                  <Button fx:id="userMove" mnemonicParsing="false" style="-fx-graphic:url('images/ID_Blue.png'); -fx-background-color:transparent" GridPane.rowIndex="1" />
+                  <Button fx:id="userMove" mnemonicParsing="false" style="-fx-graphic:url('images/User_White.png'); -fx-background-color:transparent" GridPane.rowIndex="1" />
                </children>
                <padding>
                   <Insets bottom="200.0" top="10.0" />

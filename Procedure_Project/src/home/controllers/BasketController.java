@@ -17,6 +17,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
@@ -61,7 +62,7 @@ public class BasketController implements Initializable{
 	// Control Bar
 	@FXML Button lectureMove;
 	@FXML Button userMove;
-	@FXML Button settingMove;
+	@FXML Button loginMove;
 	
 	public BasketController() {
 		this.controller = new MainController();
@@ -69,6 +70,8 @@ public class BasketController implements Initializable{
 	
 	public void initialize(URL location, ResourceBundle resources) {
 		// Basket
+		basketTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		
 		basketNumberColumn.setCellValueFactory(cellData->cellData.getValue().numberProperty().asObject());
 		basketNameColumn.setCellValueFactory(cellData->cellData.getValue().nameProperty());
 		basketProfessorColumn.setCellValueFactory(cellData->cellData.getValue().professorProperty());
@@ -110,6 +113,8 @@ public class BasketController implements Initializable{
 		});
 		
 		// Register
+		registerTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
 		registerNumberColumn.setCellValueFactory(cellData->cellData.getValue().numberProperty().asObject());
 		registerNameColumn.setCellValueFactory(cellData->cellData.getValue().nameProperty());
 		registerProfessorColumn.setCellValueFactory(cellData->cellData.getValue().professorProperty());
@@ -156,6 +161,14 @@ public class BasketController implements Initializable{
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				handleLectureMoveAction(event);
+			}
+		});
+		
+		loginMove.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				handleLoginMoveAction(event);
 			}
 		});
 	}
@@ -221,8 +234,14 @@ public class BasketController implements Initializable{
 	
 	// Control Bar Method
 		public void handleLectureMoveAction(ActionEvent event) {
-			this.controller.loadStage("src/home/fxml/Table.fxml");
+			this.controller.loadStage("src/home/fxml/Table.fxml","명지대학교 수강신청 시스템");
 			Stage basket = (Stage)lectureMove.getScene().getWindow();
+			basket.close();
+		}
+		
+		public void handleLoginMoveAction(ActionEvent event) {
+			this.controller.loadStage("src/home/fxml/Login.fxml", "명지대학교 수강신청 시스템");
+			Stage basket = (Stage)loginMove.getScene().getWindow();
 			basket.close();
 		}
 }

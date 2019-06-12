@@ -18,7 +18,7 @@ public class MainController implements Initializable {
 		
 	}
 	
-	public void loadStage(String fxml) {
+	public void loadStage(String fxml, String title) {
 		try {
 			URL fxmlPath = new File(fxml).toURL();
 			
@@ -28,6 +28,7 @@ public class MainController implements Initializable {
 			Stage stage = new Stage();
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
+			stage.setTitle(title);
 			stage.show();
 		} catch(IOException e) {
 			e.printStackTrace();

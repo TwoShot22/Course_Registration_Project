@@ -15,7 +15,7 @@
       <!-- 상단 Label -->
       <BorderPane prefHeight="600.0" prefWidth="800.0">
          <top>
-            <Pane prefHeight="150.0" style="-fx-background-color: #2d75e8;" BorderPane.alignment="CENTER">
+            <Pane prefHeight="150.0" style="-fx-background-color: #646465;" BorderPane.alignment="CENTER">
             	<children>
             	<Label layoutX="48.0" layoutY="28.0" text="Your Basket" textFill="WHITE">
             	<font>
@@ -73,9 +73,6 @@
                            <center>
                               <TableView fx:id="basketTable" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
                                 
-                                <!-- Multiple Select JavaScript Code -->
-                               	<fx:script>basketTable.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);</fx:script>
-                                
                                 <!-- TableView Column -->
                                 <columns>
                                   <TableColumn fx:id="basketNumberColumn" maxWidth="3300.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment:CENTER;" text="Number" />
@@ -126,9 +123,6 @@
                            <center>
                               <TableView fx:id="registerTable" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
                                  
-                                 <!-- Multiple Select JavaScript Code -->
-                               	<fx:script>basketTable.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);</fx:script>
-                                 
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
@@ -152,7 +146,7 @@
          
          <!-- 좌측 Control Bar -->
          <left>
-            <GridPane style="-fx-background-color: #c8c9c8;" BorderPane.alignment="CENTER">
+            <GridPane style="-fx-background-color: #a0a0a1;" BorderPane.alignment="CENTER">
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
               </columnConstraints>
@@ -162,8 +156,8 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <!-- Setting 버튼 -->
-                  <Button fx:id="settingMove" mnemonicParsing="false" style="-fx-graphic: url('images/Setting_Blue.png'); -fx-background-color:transparent" GridPane.rowIndex="2">
+                  <!-- Logout 버튼 -->
+                  <Button fx:id="loginMove" mnemonicParsing="false" style="-fx-graphic: url('images/Setting_Blue.png'); -fx-background-color:transparent" GridPane.rowIndex="2">
                   </Button>
                   
                   <!-- Lecture 이동 버튼 -->

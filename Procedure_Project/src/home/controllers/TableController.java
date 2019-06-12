@@ -27,6 +27,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
@@ -77,7 +78,7 @@ public class TableController implements Initializable{
 	
 	@FXML Button basketMove;
 	@FXML Button userMove;
-	@FXML Button settingMove;
+	@FXML Button loginMove;
 	
 	// Load Basket.fxml
 	private MainController controller;
@@ -151,6 +152,8 @@ public class TableController implements Initializable{
 		});
 
 		// Lecture Part
+		lectureTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		
 		numberColumn.setCellValueFactory(cellData->cellData.getValue().numberProperty().asObject());
 		nameColumn.setCellValueFactory(cellData->cellData.getValue().nameProperty());
 		professorColumn.setCellValueFactory(cellData->cellData.getValue().professorProperty());
@@ -215,6 +218,12 @@ public class TableController implements Initializable{
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				handleBasketMoveAction(event);
+			}
+		});
+		
+		loginMove.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				handleLoginMoveAction(event);
 			}
 		});
 	}
@@ -371,8 +380,14 @@ public class TableController implements Initializable{
 	
 	// Control Bar Method
 	public void handleBasketMoveAction(ActionEvent event) {
-		this.controller.loadStage("src/home/fxml/Basket.fxml");
+		this.controller.loadStage("src/home/fxml/Basket.fxml", "명지대학교 수강신청 시스템");
 		Stage lecture = (Stage)basketMove.getScene().getWindow();
+		lecture.close();
+	}
+	
+	public void handleLoginMoveAction(ActionEvent event) {
+		this.controller.loadStage("src/home/fxml/Login.fxml", "명지대학교 수강신청 시스템");
+		Stage lecture = (Stage)loginMove.getScene().getWindow();
 		lecture.close();
 	}
 }
