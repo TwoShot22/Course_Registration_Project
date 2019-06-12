@@ -2,11 +2,8 @@ package home.model;
 
 import java.util.Scanner;
 
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.scene.control.Button;
 
 public class LectureModel {
 	private final SimpleIntegerProperty number;

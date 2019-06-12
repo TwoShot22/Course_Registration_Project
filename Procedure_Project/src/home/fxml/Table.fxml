@@ -70,7 +70,7 @@
                     <!-- Multiple Select JavaScript Code -->
                     <fx:script>
                     	lectureTable.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);
-                    </fx:script>
+                    </fx:script> 
                     
                     <!-- TableView Column -->
                     <columns>
@@ -107,11 +107,11 @@
               </rowConstraints>
                <children>
                   <!-- Setting 버튼 -->
-                  <Button fx:id ="settingMove" mnemonicParsing="false" style="-fx-graphic: url('images/Setting_Blue.png'); -fx-background-color:transparent" GridPane.rowIndex="2">
+                  <Button fx:id="settingMove" mnemonicParsing="false" style="-fx-graphic: url('images/Setting_Blue.png'); -fx-background-color:transparent" GridPane.rowIndex="2">
                   </Button>
                   
                   <!-- Basket 이동 버튼 -->
-                  <Button fx:id ="basketMove" mnemonicParsing="false" style="-fx-graphic: url('images/Basket_Blue.png'); -fx-background-color:transparent" GridPane.rowIndex="0" />
+                  <Button fx:id="basketMove" mnemonicParsing="false" style="-fx-graphic: url('images/Basket_Blue.png'); -fx-background-color:transparent" GridPane.rowIndex="0" />
                   
                   <!-- User Information 버튼 -->
                   <Button fx:id="userMove" mnemonicParsing="false" style="-fx-graphic:url('images/ID_Blue.png'); -fx-background-color:transparent" GridPane.rowIndex="1" />

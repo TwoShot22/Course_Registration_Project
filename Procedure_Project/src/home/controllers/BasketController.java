@@ -52,9 +52,11 @@ public class BasketController implements Initializable{
 	// Data
 	private Vector<LectureModel> basketModels;
 	ObservableList<LectureModel> basketList = FXCollections.observableArrayList();
+	private Object basketOldValue;
 	
 	private Vector<LectureModel> registerModels;
 	ObservableList<LectureModel> registerList = FXCollections.observableArrayList();
+	private Object registerOldValue;
 	
 	// Control Bar
 	@FXML Button lectureMove;
@@ -79,6 +81,17 @@ public class BasketController implements Initializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		basketTable.setOnMouseClicked(event->{
+			if(basketTable.getSelectionModel().getSelectedItem()!=null) {
+				if(event.getPickResult().getIntersectedNode().equals(basketOldValue)) {
+					basketTable.getSelectionModel().clearSelection();
+					basketOldValue = null;
+				} else {
+					basketOldValue = event.getPickResult().getIntersectedNode();
+				}
+			}
+		});
 		
 		basketToRegister.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
@@ -117,6 +130,17 @@ public class BasketController implements Initializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		registerTable.setOnMouseClicked(event->{
+			if(registerTable.getSelectionModel().getSelectedItem()!=null) {
+				if(event.getPickResult().getIntersectedNode().equals(registerOldValue)) {
+					registerTable.getSelectionModel().clearSelection();
+					registerOldValue = null;
+				} else {
+					registerOldValue = event.getPickResult().getIntersectedNode();
+				}
+			}
+		});
 		
 		registerDelete.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override

@@ -5,6 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.Vector;
@@ -63,7 +67,10 @@ public class TableController implements Initializable{
 	
 	private Vector<LectureModel> lectureModels;
 	ObservableList<LectureModel> lectureList = FXCollections.observableArrayList();
-		
+	
+	private Vector<String> pickedItems;
+	private Object oldValue;
+	
 	// Button
 	@FXML Button confirmButton;
 	@FXML Button cancelButton;
@@ -149,18 +156,55 @@ public class TableController implements Initializable{
 		professorColumn.setCellValueFactory(cellData->cellData.getValue().professorProperty());
 		creditColumn.setCellValueFactory(cellData->cellData.getValue().creditProperty().asObject());
 		timeColumn.setCellValueFactory(cellData->cellData.getValue().timeProperty());
-		
-		// ªÛ¥‹ Progress Bar
-		confirmButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-
+				
+		lectureTable.setOnMouseClicked(event->{
+			if(lectureTable.getSelectionModel().getSelectedItem()!=null) {
+				if(event.getPickResult().getIntersectedNode().equals(oldValue)) {
+					lectureTable.getSelectionModel().clearSelection();
+					oldValue = null;
+				} else {
+//					LectureModel lectureModel = new LectureModel();
+					
+					ArrayList <ArrayList<String>> arrayList = new ArrayList<>();
+					
+					for (LectureModel lecture:this.lectureTable.getItems()) {
+						ArrayList<String> temp = new ArrayList<>();
+						temp.add(String.valueOf(lecture.getNumber()));
+						temp.add(lecture.getName());
+						temp.add(lecture.getProfessor());
+						temp.add(String.valueOf(lecture.getCredit()));
+						temp.add(lecture.getTime());
+						arrayList.add(temp);
+					}
+					
+					for(ArrayList<String> strings:arrayList) {
+						System.out.println(strings.get(0));
+						System.out.println(strings.get(1));
+						System.out.println(strings.get(2));
+						System.out.println(strings.get(3));
+						System.out.println(strings.get(4));
+					}
+//					System.out.println(lectureTable.getSelectionModel().getSelectedItem().getNumber());
+//					System.out.println(lectureTable.getSelectionModel().getSelectedItem().getName());
+//					System.out.println(lectureTable.getSelectionModel().getSelectedItem().getProfessor());
+//					System.out.println(lectureTable.getSelectionModel().getSelectedItem().getCredit());
+//					System.out.println(lectureTable.getSelectionModel().getSelectedItem().getTime());
+					oldValue = event.getPickResult().getIntersectedNode();
+				}
 			}
 		});
 		
-		cancelButton.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
+		// ÏÉÅÎã® Progress Bar
+		confirmButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
-			public void handle(MouseEvent arg0) {
+			public void handle(MouseEvent event) {
+				//System.out.println(pickedItems);
+			}
+		});
+		
+		cancelButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
 				lectureTable.getSelectionModel().clearSelection();
 			}
 		});
@@ -314,13 +358,10 @@ public class TableController implements Initializable{
 	} 
 	
 	private void getLectureList(String fileName) throws FileNotFoundException {
-		for(int i=0;i<lectureTable.getItems().size();i++) {
-			lectureTable.getItems().clear();
-		}
+		lectureTable.getItems().clear();
 		
 		lectureModels = getLectureData("data/"+fileName);
 		lectureList.clear();
-		
 		
 		for(LectureModel lectureModel: lectureModels) {
 			lectureTable.getItems().add(new LectureModel(new SimpleIntegerProperty(lectureModel.getNumber()), new SimpleStringProperty(lectureModel.getName()), 
