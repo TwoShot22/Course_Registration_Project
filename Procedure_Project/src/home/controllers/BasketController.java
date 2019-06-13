@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.Vector;
 
+import home.fileController.FileTool;
 import home.model.LectureModel;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -101,8 +102,18 @@ public class BasketController implements Initializable{
 		basketToRegister.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				//lectureTable.getItems().add(new LectureModel(new SimpleIntegerProperty(Integer.parseInt(numberField.getText())), new SimpleStringProperty(nameField.getText()), 
-					//	new SimpleStringProperty(professorField.getText()), new SimpleIntegerProperty(Integer.parseInt(creditField.getText())), new SimpleStringProperty(timeField.getText())));
+				Vector<String> selectedLectures = new Vector<>();
+				ObservableList<LectureModel> selectedItem = basketTable.getSelectionModel().getSelectedItems();
+				
+				for(int i=0;i<selectedItem.size();i++) {
+					selectedLectures.add(String.valueOf(selectedItem.get(i).getNumber()));
+					selectedLectures.add(selectedItem.get(i).getName());
+					selectedLectures.add(selectedItem.get(i).getProfessor());
+					selectedLectures.add(String.valueOf(selectedItem.get(i).getCredit()));
+					selectedLectures.add(selectedItem.get(i).getTime());
+				}
+				
+				FileTool.writeOnTxtFile(selectedLectures, "data/user/Register");
 			}
 		});
 		
@@ -133,8 +144,18 @@ public class BasketController implements Initializable{
 		registerToBasket.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				//lectureTable.getItems().add(new LectureModel(new SimpleIntegerProperty(Integer.parseInt(numberField.getText())), new SimpleStringProperty(nameField.getText()), 
-					//	new SimpleStringProperty(professorField.getText()), new SimpleIntegerProperty(Integer.parseInt(creditField.getText())), new SimpleStringProperty(timeField.getText())));
+				Vector<String> selectedLectures = new Vector<>();
+				ObservableList<LectureModel> selectedItem = registerTable.getSelectionModel().getSelectedItems();
+				
+				for(int i=0;i<selectedItem.size();i++) {
+					selectedLectures.add(String.valueOf(selectedItem.get(i).getNumber()));
+					selectedLectures.add(selectedItem.get(i).getName());
+					selectedLectures.add(selectedItem.get(i).getProfessor());
+					selectedLectures.add(String.valueOf(selectedItem.get(i).getCredit()));
+					selectedLectures.add(selectedItem.get(i).getTime());
+				}
+				
+				FileTool.writeOnTxtFile(selectedLectures, "data/user/Basket");
 			}
 		});
 		
@@ -159,8 +180,7 @@ public class BasketController implements Initializable{
 		registerDelete.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				//lectureTable.getItems().add(new LectureModel(new SimpleIntegerProperty(Integer.parseInt(numberField.getText())), new SimpleStringProperty(nameField.getText()), 
-					//	new SimpleStringProperty(professorField.getText()), new SimpleIntegerProperty(Integer.parseInt(creditField.getText())), new SimpleStringProperty(timeField.getText())));
+				
 			}
 		});
 		

@@ -1,21 +1,26 @@
 package home.fileController;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Vector;
 
-import home.model.LectureModel;
-
 public class FileTool {
 
-	public static void writeOnTxtFile(Vector<LectureModel> lectureModels, String fileName) {
+	public static void writeOnTxtFile(Vector<String> selectedItem, String fileName) {
 		try {
 			@SuppressWarnings("resource")
-			FileWriter fileWriter = new FileWriter(new File(fileName));
-			for(LectureModel lectureModel : lectureModels) {
-				fileWriter.write(lectureModel.getNumber()+" "+lectureModel.getName()+" "+lectureModel.getProfessor()+" "+lectureModel.getCredit()+" "+lectureModel.getTime());				
+			FileWriter fileWriter = new FileWriter(fileName, true);
+			
+			for(int i=0;i<selectedItem.size();i++) {
+				if(i%5==0) {
+					fileWriter.write("\r\n" +selectedItem.get(i)+" ");
+				} else if(i%5==4){
+					fileWriter.write(selectedItem.get(i));										
+				} else {
+					fileWriter.write(selectedItem.get(i)+" ");
+				}
 			}
+			
 			fileWriter.close();
 		} catch (IOException e) {
 			System.out.println("File Not Found");

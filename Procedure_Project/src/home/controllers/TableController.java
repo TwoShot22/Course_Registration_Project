@@ -13,6 +13,8 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.Vector;
 
+import home.fileController.CheckDuplication;
+import home.fileController.FileTool;
 import home.model.DirectoryModel;
 import home.model.LectureModel;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -69,7 +71,6 @@ public class TableController implements Initializable{
 	private Vector<LectureModel> lectureModels;
 	ObservableList<LectureModel> lectureList = FXCollections.observableArrayList();
 	
-	private Vector<String> selectedLecture;
 	private Object oldValue;
 	
 	// Button
@@ -82,9 +83,13 @@ public class TableController implements Initializable{
 	
 	// Load Basket.fxml
 	private MainController controller;
+	private FileTool fileTool;
+	private CheckDuplication checkDuplication;
 	
 	public TableController() {
 		this.controller = new MainController();
+		this.fileTool = new FileTool();
+		this.checkDuplication = new CheckDuplication();
 	}
 	
 	// Initialize Methods
@@ -174,32 +179,6 @@ public class TableController implements Initializable{
 					lectureTable.getSelectionModel().clearSelection();
 					oldValue = null;
 				} else {
-					LectureModel lectureModel = new LectureModel();
-					
-					ArrayList <ArrayList<String>> arrayList = new ArrayList<>();
-					
-//					for (LectureModel lecture:this.lectureTable.getItems()) {
-//						if(lecture == this.lectureTable.getSelectionModel().getSelectedItem()) {
-//							ArrayList<String> temp = new ArrayList<>();
-//							temp.add(String.valueOf(lecture.getNumber()));
-//							temp.add(lecture.getName());
-//							temp.add(lecture.getProfessor());
-//							temp.add(String.valueOf(lecture.getCredit()));
-//							temp.add(lecture.getTime());
-//							arrayList.add(temp);				
-//						}
-//					}
-//					
-//					for(ArrayList<String> strings:arrayList) {
-//						System.out.println("-----------------------------------");
-//						System.out.println(strings.get(0));
-//						System.out.println(strings.get(1));
-//						System.out.println(strings.get(2));
-//						System.out.println(strings.get(3));
-//						System.out.println(strings.get(4));
-//						System.out.println("------------- Size is : "+arrayList.size());
-//					}
-//					
 					oldValue = event.getPickResult().getIntersectedNode();
 				}
 			}
@@ -212,7 +191,6 @@ public class TableController implements Initializable{
 				Vector<String> selectedLectures = new Vector<>();
 				ObservableList<LectureModel> selectedItem = lectureTable.getSelectionModel().getSelectedItems();
 				
-				System.out.println("Selected Item Size is : "+selectedItem.size());
 				for(int i=0;i<selectedItem.size();i++) {
 					selectedLectures.add(String.valueOf(selectedItem.get(i).getNumber()));
 					selectedLectures.add(selectedItem.get(i).getName());
@@ -221,9 +199,7 @@ public class TableController implements Initializable{
 					selectedLectures.add(selectedItem.get(i).getTime());
 				}
 				
-				for(int i=0;i<selectedLectures.size();i++) {
-					System.out.println(selectedLectures.get(i));
-				}
+				FileTool.writeOnTxtFile(selectedLectures, "data/user/Basket");
 			}
 		});
 		
