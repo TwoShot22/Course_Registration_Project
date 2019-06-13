@@ -37,22 +37,22 @@
                <top>
                   <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
                     <columnConstraints>
-                      <ColumnConstraints halignment="CENTER" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="340.0" minWidth="10.0" prefWidth="180.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="340.0" minWidth="10.0" prefWidth="180.0" />
+                      <ColumnConstraints halignment="CENTER" prefWidth="170.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="170.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="170.0" />
                         <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="340.0" minWidth="10.0" prefWidth="150.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="340.0" minWidth="10.0" prefWidth="70.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="340.0" minWidth="10.0" prefWidth="70.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="340.0" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="340.0" minWidth="10.0" prefWidth="60.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="confirmButton" mnemonicParsing="false" style="-fx-graphic: url('images/Lecture_Yes_White.png'); -fx-background-color:transparent" GridPane.columnIndex="4" />
-                        <Button fx:id="cancelButton" mnemonicParsing="false" style="-fx-graphic: url('images/No_White.png'); -fx-background-color:transparent" GridPane.columnIndex="5" />
+                        <Button fx:id="lectureToBasket" mnemonicParsing="false" style="-fx-graphic: url('images/LectureToBasket_Gray.png'); -fx-background-color:transparent" GridPane.columnIndex="4" />
+                        <Button fx:id="lectureRefresh" mnemonicParsing="false" style="-fx-graphic: url('images/Refresh_Gray.png'); -fx-background-color:transparent" GridPane.columnIndex="5" />
                         <Label text="Confirm" textAlignment="CENTER" GridPane.columnIndex="3">
                            <font>
-                              <Font size="21.0" />
+                              <Font name="Arial" size="24.0" />
                            </font></Label>
                         <ComboBox fx:id="campusPickBox" prefWidth="150.0" promptText="Campus" />
                         <ComboBox fx:id="collegePickBox" prefWidth="150.0" promptText="College" GridPane.columnIndex="1" />
@@ -109,7 +109,7 @@
                   <Button fx:id="basketMove" mnemonicParsing="false" style="-fx-graphic: url('images/Basket_White.png'); -fx-background-color:transparent" GridPane.rowIndex="0" />
                   
                   <!-- User Information 버튼 -->
-                  <Button fx:id="userMove" mnemonicParsing="false" style="-fx-graphic:url('images/User_White.png'); -fx-background-color:transparent" GridPane.rowIndex="1" />
+                  <Button fx:id="userMove" mnemonicParsing="false" style="-fx-graphic:url('images/UserInfo_White.png'); -fx-background-color:transparent" GridPane.rowIndex="1" />
                </children>
                <padding>
                   <Insets bottom="200.0" top="10.0" />

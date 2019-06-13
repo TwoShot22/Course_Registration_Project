@@ -50,6 +50,7 @@
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="250.0" />
                                   <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                 </columnConstraints>
                                 <rowConstraints>
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -57,16 +58,17 @@
                                  <children>
                                     <Label text="[Basket]">
                                        <font>
-                                          <Font name="System Bold" size="24.0" />
+                                          <Font name="Arial" size="24.0" />
                                        </font></Label>
-                                    <Button fx:id="basketToRegister" mnemonicParsing="false" style="-fx-graphic: url('images/Yes_Blue.png'); -fx-background-color:transparent" GridPane.columnIndex="1">
+                                    <Button fx:id="basketToRegister" mnemonicParsing="false" style="-fx-graphic: url('images/basketToRegister_Gray.png'); -fx-background-color:transparent" GridPane.columnIndex="1">
                                        <font>
                                           <Font size="20.0" />
                                        </font></Button>
-                                    <Button fx:id="basketDelete" mnemonicParsing="false" style="-fx-graphic: url('images/Trash_Blue.png'); -fx-background-color:transparent" GridPane.columnIndex="2" />
+                                    <Button fx:id="basketDelete" mnemonicParsing="false" style="-fx-graphic: url('images/Trash_Gray.png'); -fx-background-color:transparent" GridPane.columnIndex="2" />
+                                    <Button fx:id="basketRefresh" mnemonicParsing="false" style="-fx-graphic:url('images/Refresh_Gray.png'); -fx-background-color:transparent" GridPane.columnIndex="3" />
                                  </children>
                                  <padding>
-                                    <Insets left="5.0" right="10.0" top="10.0" />
+                                    <Insets left="5.0" right="10.0" top="5.0" />
                                  </padding>
                               </GridPane>
                            </top>
@@ -82,7 +84,7 @@
                                   <TableColumn fx:id="basketTimeColumn" maxWidth="5500.0" minWidth="-1.0" prefWidth="-1.0" text="Time" />
                                 </columns>
                                  <padding>
-                                    <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
+                                    <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
                                  </padding>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -96,23 +98,25 @@
                                  <children>
                                     <Label text="[Register]">
                                        <font>
-                                          <Font name="System Bold" size="24.0" />
+                                          <Font name="Arial" size="24.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="registerToBasket" mnemonicParsing="false" style="-fx-graphic: url('images/NoThanks_Blue.png'); -fx-background-color:transparent" GridPane.columnIndex="1">
+                                    <Button fx:id="registerToBasket" mnemonicParsing="false" style="-fx-graphic: url('images/registerToBasket_Gray.png'); -fx-background-color:transparent" GridPane.columnIndex="1">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="registerDelete" mnemonicParsing="false" style="-fx-graphic: url('images/Trash_Blue.png'); -fx-background-color:transparent" GridPane.columnIndex="2" />
+                                    <Button fx:id="registerDelete" mnemonicParsing="false" style="-fx-graphic: url('images/Trash_Gray.png'); -fx-background-color:transparent" GridPane.columnIndex="2" />
+                                    <Button fx:id="registerRefresh" mnemonicParsing="false" style="-fx-graphic:url('images/Refresh_Gray.png'); -fx-background-color:transparent" GridPane.columnIndex="3" />
                                  </children>
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="250.0" />
                                     <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                  </columnConstraints>
                                  <padding>
-                                    <Insets left="5.0" right="10.0" top="8.0" />
+                                    <Insets left="5.0" right="10.0" top="5.0" />
                                  </padding>
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -134,7 +138,7 @@
                                     <TableColumn fx:id="registerTimeColumn" maxWidth="5500.0" minWidth="-1.0" prefWidth="-1.0" text="Time" />
                                  </columns>
                                  <padding>
-                                    <Insets bottom="10.0" left="5.0" right="10.0" top="8.0" />
+                                    <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
                                  </padding>
                               </TableView>
                            </center></BorderPane>
@@ -157,14 +161,14 @@
               </rowConstraints>
                <children>
                   <!-- Logout 버튼 -->
-                  <Button fx:id="loginMove" mnemonicParsing="false" style="-fx-graphic: url('images/Setting_Blue.png'); -fx-background-color:transparent" GridPane.rowIndex="2">
+                  <Button fx:id="loginMove" mnemonicParsing="false" style="-fx-graphic: url('images/Logout_White.png'); -fx-background-color:transparent" GridPane.rowIndex="2">
                   </Button>
                   
                   <!-- Lecture 이동 버튼 -->
-                  <Button fx:id="lectureMove" mnemonicParsing="false" style="-fx-graphic: url('images/Lecture_Blue.png'); -fx-background-color:transparent" GridPane.rowIndex="0" />
+                  <Button fx:id="lectureMove" mnemonicParsing="false" style="-fx-graphic: url('images/Lecture_White.png'); -fx-background-color:transparent" GridPane.rowIndex="0" />
                   
                   <!-- User Information 버튼 -->
-                  <Button fx:id="userMove" mnemonicParsing="false" style="-fx-graphic:url('images/ID_Blue.png'); -fx-background-color:transparent" GridPane.rowIndex="1" />
+                  <Button fx:id="userMove" mnemonicParsing="false" style="-fx-graphic:url('images/UserInfo_White.png'); -fx-background-color:transparent" GridPane.rowIndex="1" />
                </children>
                <padding>
                   <Insets bottom="200.0" top="10.0" />

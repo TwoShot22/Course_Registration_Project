@@ -37,6 +37,7 @@ public class BasketController implements Initializable{
 	
 	@FXML Button basketToRegister;
 	@FXML Button basketDelete;
+	@FXML Button basketRefresh;
 	
 	// Register
 	@FXML TableView<LectureModel> registerTable;
@@ -49,6 +50,7 @@ public class BasketController implements Initializable{
 	
 	@FXML Button registerToBasket;
 	@FXML Button registerDelete;
+	@FXML Button registerRefresh;
 	
 	// Data
 	private Vector<LectureModel> basketModels;
@@ -112,6 +114,13 @@ public class BasketController implements Initializable{
 			}
 		});
 		
+		basketRefresh.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				basketTable.getSelectionModel().clearSelection();
+			}
+		});
+		
 		// Register
 		registerTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
@@ -152,6 +161,13 @@ public class BasketController implements Initializable{
 			public void handle(MouseEvent event) {
 				//lectureTable.getItems().add(new LectureModel(new SimpleIntegerProperty(Integer.parseInt(numberField.getText())), new SimpleStringProperty(nameField.getText()), 
 					//	new SimpleStringProperty(professorField.getText()), new SimpleIntegerProperty(Integer.parseInt(creditField.getText())), new SimpleStringProperty(timeField.getText())));
+			}
+		});
+		
+		registerRefresh.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				registerTable.getSelectionModel().clearSelection();
 			}
 		});
 		

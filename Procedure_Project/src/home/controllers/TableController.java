@@ -73,8 +73,8 @@ public class TableController implements Initializable{
 	private Object oldValue;
 	
 	// Button
-	@FXML Button confirmButton;
-	@FXML Button cancelButton;
+	@FXML Button lectureToBasket;
+	@FXML Button lectureRefresh;
 	
 	@FXML Button basketMove;
 	@FXML Button userMove;
@@ -167,45 +167,49 @@ public class TableController implements Initializable{
 					oldValue = null;
 				} else {
 //					LectureModel lectureModel = new LectureModel();
-					
-					ArrayList <ArrayList<String>> arrayList = new ArrayList<>();
-					
-					for (LectureModel lecture:this.lectureTable.getItems()) {
-						ArrayList<String> temp = new ArrayList<>();
-						temp.add(String.valueOf(lecture.getNumber()));
-						temp.add(lecture.getName());
-						temp.add(lecture.getProfessor());
-						temp.add(String.valueOf(lecture.getCredit()));
-						temp.add(lecture.getTime());
-						arrayList.add(temp);
-					}
-					
-					for(ArrayList<String> strings:arrayList) {
-						System.out.println(strings.get(0));
-						System.out.println(strings.get(1));
-						System.out.println(strings.get(2));
-						System.out.println(strings.get(3));
-						System.out.println(strings.get(4));
-					}
-//					System.out.println(lectureTable.getSelectionModel().getSelectedItem().getNumber());
-//					System.out.println(lectureTable.getSelectionModel().getSelectedItem().getName());
-//					System.out.println(lectureTable.getSelectionModel().getSelectedItem().getProfessor());
-//					System.out.println(lectureTable.getSelectionModel().getSelectedItem().getCredit());
-//					System.out.println(lectureTable.getSelectionModel().getSelectedItem().getTime());
+//					
+//					ArrayList <ArrayList<String>> arrayList = new ArrayList<>();
+//					
+//					for (LectureModel lecture:this.lectureTable.getItems()) {
+//						if(lecture == this.lectureTable.getSelectionModel().getSelectedItem()) {
+//							ArrayList<String> temp = new ArrayList<>();
+//							temp.add(String.valueOf(lecture.getNumber()));
+//							temp.add(lecture.getName());
+//							temp.add(lecture.getProfessor());
+//							temp.add(String.valueOf(lecture.getCredit()));
+//							temp.add(lecture.getTime());
+//							arrayList.add(temp);				
+//						}
+//					}
+//					
+//					for(ArrayList<String> strings:arrayList) {
+//						System.out.println("-----------------------------------");
+//						System.out.println(strings.get(0));
+//						System.out.println(strings.get(1));
+//						System.out.println(strings.get(2));
+//						System.out.println(strings.get(3));
+//						System.out.println(strings.get(4));
+//						System.out.println("------------- Size is : "+arrayList.size());
+//					}
+//					
 					oldValue = event.getPickResult().getIntersectedNode();
 				}
 			}
 		});
 		
 		// 상단 Progress Bar
-		confirmButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+		lectureToBasket.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-
+				ObservableList<LectureModel> row, allRows;
+				
+				allRows = lectureTable.getItems();
+				row = lectureTable.getSelectionModel().getSelectedItems();
+				row.forEach(allRows::remove);
 			}
 		});
 		
-		cancelButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+		lectureRefresh.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				lectureTable.getSelectionModel().clearSelection();
