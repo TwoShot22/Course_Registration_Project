@@ -114,6 +114,15 @@ public class BasketController implements Initializable{
 				}
 				
 				FileTool.writeOnTxtFile(selectedLectures, "data/user/Register");
+				
+				try {
+					getRegisterList("Register");
+					registerTable.refresh();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 		});
 		
@@ -156,6 +165,15 @@ public class BasketController implements Initializable{
 				}
 				
 				FileTool.writeOnTxtFile(selectedLectures, "data/user/Basket");
+				
+				try {
+					getBasketList("Basket");
+					basketTable.refresh();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 		});
 		
