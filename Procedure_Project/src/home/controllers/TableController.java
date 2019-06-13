@@ -69,7 +69,7 @@ public class TableController implements Initializable{
 	private Vector<LectureModel> lectureModels;
 	ObservableList<LectureModel> lectureList = FXCollections.observableArrayList();
 	
-	private Vector<String> pickedItems;
+	private Vector<String> selectedLecture;
 	private Object oldValue;
 	
 	// Button
@@ -159,17 +159,25 @@ public class TableController implements Initializable{
 		professorColumn.setCellValueFactory(cellData->cellData.getValue().professorProperty());
 		creditColumn.setCellValueFactory(cellData->cellData.getValue().creditProperty().asObject());
 		timeColumn.setCellValueFactory(cellData->cellData.getValue().timeProperty());
-				
+		
+		lectureTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<LectureModel>() {
+			public void changed(ObservableValue<? extends LectureModel> observable, LectureModel oldValue,
+					LectureModel newValue) {
+				LectureModel selected = lectureTable.getSelectionModel().getSelectedItem();
+				//getSelectedLecture(selected);
+			}
+		});
+		
 		lectureTable.setOnMouseClicked(event->{
 			if(lectureTable.getSelectionModel().getSelectedItem()!=null) {
 				if(event.getPickResult().getIntersectedNode().equals(oldValue)) {
 					lectureTable.getSelectionModel().clearSelection();
 					oldValue = null;
 				} else {
-//					LectureModel lectureModel = new LectureModel();
-//					
-//					ArrayList <ArrayList<String>> arrayList = new ArrayList<>();
-//					
+					LectureModel lectureModel = new LectureModel();
+					
+					ArrayList <ArrayList<String>> arrayList = new ArrayList<>();
+					
 //					for (LectureModel lecture:this.lectureTable.getItems()) {
 //						if(lecture == this.lectureTable.getSelectionModel().getSelectedItem()) {
 //							ArrayList<String> temp = new ArrayList<>();
@@ -201,11 +209,21 @@ public class TableController implements Initializable{
 		lectureToBasket.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				ObservableList<LectureModel> row, allRows;
+				Vector<String> selectedLectures = new Vector<>();
+				ObservableList<LectureModel> selectedItem = lectureTable.getSelectionModel().getSelectedItems();
 				
-				allRows = lectureTable.getItems();
-				row = lectureTable.getSelectionModel().getSelectedItems();
-				row.forEach(allRows::remove);
+				System.out.println("Selected Item Size is : "+selectedItem.size());
+				for(int i=0;i<selectedItem.size();i++) {
+					selectedLectures.add(String.valueOf(selectedItem.get(i).getNumber()));
+					selectedLectures.add(selectedItem.get(i).getName());
+					selectedLectures.add(selectedItem.get(i).getProfessor());
+					selectedLectures.add(String.valueOf(selectedItem.get(i).getCredit()));
+					selectedLectures.add(selectedItem.get(i).getTime());
+				}
+				
+				for(int i=0;i<selectedLectures.size();i++) {
+					System.out.println(selectedLectures.get(i));
+				}
 			}
 		});
 		
