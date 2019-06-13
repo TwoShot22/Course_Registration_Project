@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.Vector;
 
+import home.fileController.CheckDuplication;
 import home.fileController.FileTool;
 import home.model.LectureModel;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -112,12 +113,13 @@ public class BasketController implements Initializable{
 					selectedLectures.add(String.valueOf(selectedItem.get(i).getCredit()));
 					selectedLectures.add(selectedItem.get(i).getTime());
 				}
-				
-				FileTool.writeOnTxtFile(selectedLectures, "data/user/Register");
+				CheckDuplication.addLectureToFile(selectedLectures, "data/user/Register");
 				
 				try {
 					getRegisterList("Register");
 					registerTable.refresh();
+					basketTable.getSelectionModel().clearSelection();
+					registerTable.getSelectionModel().clearSelection();
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -164,11 +166,13 @@ public class BasketController implements Initializable{
 					selectedLectures.add(selectedItem.get(i).getTime());
 				}
 				
-				FileTool.writeOnTxtFile(selectedLectures, "data/user/Basket");
+				CheckDuplication.addLectureToFile(selectedLectures,"data/user/Basket");
 				
 				try {
 					getBasketList("Basket");
 					basketTable.refresh();
+					basketTable.getSelectionModel().clearSelection();
+					registerTable.getSelectionModel().clearSelection();
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
