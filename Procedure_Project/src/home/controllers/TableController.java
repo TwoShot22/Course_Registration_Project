@@ -159,14 +159,6 @@ public class TableController implements Initializable{
 		creditColumn.setCellValueFactory(cellData->cellData.getValue().creditProperty().asObject());
 		timeColumn.setCellValueFactory(cellData->cellData.getValue().timeProperty());
 		
-		lectureTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<LectureModel>() {
-			public void changed(ObservableValue<? extends LectureModel> observable, LectureModel oldValue,
-					LectureModel newValue) {
-				LectureModel selected = lectureTable.getSelectionModel().getSelectedItem();
-				//getSelectedLecture(selected);
-			}
-		});
-		
 		lectureTable.setOnMouseClicked(event->{
 			if(lectureTable.getSelectionModel().getSelectedItem()!=null) {
 				if(event.getPickResult().getIntersectedNode().equals(oldValue)) {
@@ -292,7 +284,7 @@ public class TableController implements Initializable{
 		scanner.close();
 		return collegeModels;
 	}
-		
+			
 	private String getCollegeHyperLink(String fileName) throws FileNotFoundException {		
 		collegeModels = getCollegeData("data/"+fileName);
 			
