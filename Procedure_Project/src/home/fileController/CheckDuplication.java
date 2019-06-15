@@ -2,7 +2,6 @@ package home.fileController;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -13,19 +12,10 @@ public class CheckDuplication {
 	}
 	
 	@SuppressWarnings("resource")
-	public static void addLectureToFile(Vector<String> selectedItem, String targetFileName) {
+	public static void manageLectureFile(String selectedLectures, String targetFileName, String mode) {
 		try {
 			Vector<String> beforeContents = new Vector<String>();
 			File targetFile = new File(targetFileName);
-			String compareItem = "";
-			
-			for(int i=0;i<selectedItem.size();i++) {
-				if(i==4) {
-					compareItem+=(selectedItem.get(i));
-				} else {
-					compareItem+=(selectedItem.get(i) + " ");					
-				}
-			}
 			
 			//Read All Row
 			Scanner scanner = new Scanner(targetFile);
@@ -36,11 +26,15 @@ public class CheckDuplication {
 			//Clear File & Write Content Except Target Row
 			FileWriter fileWriter = new FileWriter(targetFile, false);
 			for(String row : beforeContents) {
-				if(!row.equals(compareItem)) {
+				if(!row.equals(selectedLectures)) {
 					fileWriter.write(row+"\r\n");
 				}
 			}
-			fileWriter.write(compareItem);
+			
+			if(mode=="AddLecture") {
+				fileWriter.write(selectedLectures);				
+			}
+			
 			fileWriter.flush();
 			
 		} catch(Exception e) {

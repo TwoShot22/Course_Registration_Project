@@ -2,13 +2,7 @@ package home.controllers;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.Vector;
@@ -188,18 +182,25 @@ public class TableController implements Initializable{
 		lectureToBasket.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
+				Vector<String> selectedLecture = new Vector<>();
 				Vector<String> selectedLectures = new Vector<>();
 				ObservableList<LectureModel> selectedItem = lectureTable.getSelectionModel().getSelectedItems();
 				
 				for(int i=0;i<selectedItem.size();i++) {
-					selectedLectures.add(String.valueOf(selectedItem.get(i).getNumber()));
-					selectedLectures.add(selectedItem.get(i).getName());
-					selectedLectures.add(selectedItem.get(i).getProfessor());
-					selectedLectures.add(String.valueOf(selectedItem.get(i).getCredit()));
-					selectedLectures.add(selectedItem.get(i).getTime());
+					selectedLecture.add(String.valueOf(selectedItem.get(i).getNumber()));
+					selectedLecture.add(selectedItem.get(i).getName());
+					selectedLecture.add(selectedItem.get(i).getProfessor());
+					selectedLecture.add(String.valueOf(selectedItem.get(i).getCredit()));
+					selectedLecture.add(selectedItem.get(i).getTime());
 				}
 				
-				FileTool.writeOnTxtFile(selectedLectures, "data/user/Basket");
+				for(int i=0;i<selectedLecture.size();i+=5) {
+					selectedLectures.add(selectedLecture.get(i)+" "+selectedLecture.get(i+1)+" "+selectedLecture.get(i+2)+" "+selectedLecture.get(i+3)+" "+selectedLecture.get(i+4));
+				}
+				
+				for(int i=0; i<selectedLectures.size();i++) {
+					CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/Basket","AddLecture");					
+				}
 			}
 		});
 		

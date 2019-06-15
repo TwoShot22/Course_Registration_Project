@@ -9,13 +9,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<StackPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controllers.BasketController">
+<StackPane minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controllers.BasketController">
    <children>
       
       <!-- 상단 Label -->
       <BorderPane prefHeight="600.0" prefWidth="800.0">
          <top>
-            <Pane prefHeight="150.0" style="-fx-background-color: #646465;" BorderPane.alignment="CENTER">
+            <Pane minWidth="-Infinity" prefHeight="150.0" prefWidth="600.0" style="-fx-background-color: #646465;" BorderPane.alignment="CENTER">
             	<children>
             	<Label layoutX="48.0" layoutY="28.0" text="Your Basket" textFill="WHITE">
             	<font>

@@ -8,7 +8,6 @@ import java.util.Scanner;
 import java.util.Vector;
 
 import home.fileController.CheckDuplication;
-import home.fileController.FileTool;
 import home.model.LectureModel;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -103,17 +102,25 @@ public class BasketController implements Initializable{
 		basketToRegister.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
+				Vector<String> selectedLecture = new Vector<>();
 				Vector<String> selectedLectures = new Vector<>();
 				ObservableList<LectureModel> selectedItem = basketTable.getSelectionModel().getSelectedItems();
 				
 				for(int i=0;i<selectedItem.size();i++) {
-					selectedLectures.add(String.valueOf(selectedItem.get(i).getNumber()));
-					selectedLectures.add(selectedItem.get(i).getName());
-					selectedLectures.add(selectedItem.get(i).getProfessor());
-					selectedLectures.add(String.valueOf(selectedItem.get(i).getCredit()));
-					selectedLectures.add(selectedItem.get(i).getTime());
+					selectedLecture.add(String.valueOf(selectedItem.get(i).getNumber()));
+					selectedLecture.add(selectedItem.get(i).getName());
+					selectedLecture.add(selectedItem.get(i).getProfessor());
+					selectedLecture.add(String.valueOf(selectedItem.get(i).getCredit()));
+					selectedLecture.add(selectedItem.get(i).getTime());
 				}
-				CheckDuplication.addLectureToFile(selectedLectures, "data/user/Register");
+				
+				for(int i=0;i<selectedLecture.size();i+=5) {
+					selectedLectures.add(selectedLecture.get(i)+" "+selectedLecture.get(i+1)+" "+selectedLecture.get(i+2)+" "+selectedLecture.get(i+3)+" "+selectedLecture.get(i+4));
+				}
+				
+				for(int i=0; i<selectedLectures.size();i++) {
+					CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/Register","AddLecture");					
+				}
 				
 				try {
 					getRegisterList("Register");
@@ -131,8 +138,34 @@ public class BasketController implements Initializable{
 		basketDelete.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				//lectureTable.getItems().add(new LectureModel(new SimpleIntegerProperty(Integer.parseInt(numberField.getText())), new SimpleStringProperty(nameField.getText()), 
-					//	new SimpleStringProperty(professorField.getText()), new SimpleIntegerProperty(Integer.parseInt(creditField.getText())), new SimpleStringProperty(timeField.getText())));
+				Vector<String> selectedLecture = new Vector<>();
+				Vector<String> selectedLectures = new Vector<>();
+				ObservableList<LectureModel> selectedItem = basketTable.getSelectionModel().getSelectedItems();
+				
+				for(int i=0;i<selectedItem.size();i++) {
+					selectedLecture.add(String.valueOf(selectedItem.get(i).getNumber()));
+					selectedLecture.add(selectedItem.get(i).getName());
+					selectedLecture.add(selectedItem.get(i).getProfessor());
+					selectedLecture.add(String.valueOf(selectedItem.get(i).getCredit()));
+					selectedLecture.add(selectedItem.get(i).getTime());
+				}
+				
+				for(int i=0;i<selectedLecture.size();i+=5) {
+					selectedLectures.add(selectedLecture.get(i)+" "+selectedLecture.get(i+1)+" "+selectedLecture.get(i+2)+" "+selectedLecture.get(i+3)+" "+selectedLecture.get(i+4));
+				}
+				
+				for(int i=0; i<selectedLectures.size();i++) {
+					CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/Basket","DeleteLecture");					
+				}
+				
+				try {
+					getBasketList("Basket");
+					basketTable.refresh();
+					basketTable.getSelectionModel().clearSelection();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		
@@ -152,35 +185,6 @@ public class BasketController implements Initializable{
 		registerCreditColumn.setCellValueFactory(cellData->cellData.getValue().creditProperty().asObject());
 		registerTimeColumn.setCellValueFactory(cellData->cellData.getValue().timeProperty());
 		
-		registerToBasket.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				Vector<String> selectedLectures = new Vector<>();
-				ObservableList<LectureModel> selectedItem = registerTable.getSelectionModel().getSelectedItems();
-				
-				for(int i=0;i<selectedItem.size();i++) {
-					selectedLectures.add(String.valueOf(selectedItem.get(i).getNumber()));
-					selectedLectures.add(selectedItem.get(i).getName());
-					selectedLectures.add(selectedItem.get(i).getProfessor());
-					selectedLectures.add(String.valueOf(selectedItem.get(i).getCredit()));
-					selectedLectures.add(selectedItem.get(i).getTime());
-				}
-				
-				CheckDuplication.addLectureToFile(selectedLectures,"data/user/Basket");
-				
-				try {
-					getBasketList("Basket");
-					basketTable.refresh();
-					basketTable.getSelectionModel().clearSelection();
-					registerTable.getSelectionModel().clearSelection();
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
-		});
-		
 		try {
 			this.getRegisterList("Register");
 		} catch (FileNotFoundException e) {
@@ -199,10 +203,74 @@ public class BasketController implements Initializable{
 			}
 		});
 		
+		registerToBasket.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				Vector<String> selectedLecture = new Vector<>();
+				Vector<String> selectedLectures = new Vector<>();
+				ObservableList<LectureModel> selectedItem = registerTable.getSelectionModel().getSelectedItems();
+				
+				for(int i=0;i<selectedItem.size();i++) {
+					selectedLecture.add(String.valueOf(selectedItem.get(i).getNumber()));
+					selectedLecture.add(selectedItem.get(i).getName());
+					selectedLecture.add(selectedItem.get(i).getProfessor());
+					selectedLecture.add(String.valueOf(selectedItem.get(i).getCredit()));
+					selectedLecture.add(selectedItem.get(i).getTime());
+				}
+				
+				for(int i=0;i<selectedLecture.size();i+=5) {
+					selectedLectures.add(selectedLecture.get(i)+" "+selectedLecture.get(i+1)+" "+selectedLecture.get(i+2)+" "+selectedLecture.get(i+3)+" "+selectedLecture.get(i+4));
+				}
+				
+				for(int i=0; i<selectedLectures.size();i++) {
+					CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/Basket","AddLecture");					
+				}
+				
+				try {
+					getBasketList("Basket");
+					basketTable.refresh();
+					basketTable.getSelectionModel().clearSelection();
+					registerTable.getSelectionModel().clearSelection();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		});
+		
 		registerDelete.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
+				Vector<String> selectedLecture = new Vector<>();
+				Vector<String> selectedLectures = new Vector<>();
+				ObservableList<LectureModel> selectedItem = registerTable.getSelectionModel().getSelectedItems();
 				
+				for(int i=0;i<selectedItem.size();i++) {
+					selectedLecture.add(String.valueOf(selectedItem.get(i).getNumber()));
+					selectedLecture.add(selectedItem.get(i).getName());
+					selectedLecture.add(selectedItem.get(i).getProfessor());
+					selectedLecture.add(String.valueOf(selectedItem.get(i).getCredit()));
+					selectedLecture.add(selectedItem.get(i).getTime());
+				}
+				
+				for(int i=0;i<selectedLecture.size();i+=5) {
+					selectedLectures.add(selectedLecture.get(i)+" "+selectedLecture.get(i+1)+" "+selectedLecture.get(i+2)+" "+selectedLecture.get(i+3)+" "+selectedLecture.get(i+4));
+				}
+				
+				for(int i=0; i<selectedLectures.size();i++) {
+					CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/Register","DeleteLecture");					
+				}
+				
+				try {
+					getRegisterList("Register");
+					registerTable.refresh();
+					basketTable.getSelectionModel().clearSelection();
+					registerTable.getSelectionModel().clearSelection();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		
