@@ -13,7 +13,7 @@
    <children>
       
       <!-- 좌측 UI -->
-      <BorderPane maxWidth="350.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="600.0" prefWidth="350.0" style="-fx-background-color: #2196F3;" StackPane.alignment="CENTER_LEFT">
+      <BorderPane maxWidth="350.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="600.0" prefWidth="350.0" style="-fx-background-color: #646465;" StackPane.alignment="CENTER_LEFT">
          <StackPane.margin>
             <Insets />
          </StackPane.margin>
@@ -36,7 +36,7 @@
                      </font></Label>
                   <Label text="Learning Management" textFill="WHITE" GridPane.rowIndex="2">
                      <font>
-                        <Font size="24.0" />
+                        <Font name="Arial" size="25.0" />
                      </font>
                      <GridPane.margin>
                         <Insets />
@@ -46,16 +46,16 @@
                      </padding></Label>
                   <Label text="System" textFill="WHITE" GridPane.rowIndex="3">
                      <font>
-                        <Font size="24.0" />
+                        <Font name="Arial" size="25.0" />
                      </font>
                      <padding>
                         <Insets bottom="30.0" />
                      </padding></Label>
-                  <Label >
+                  <Label>
                   	<graphic>
-                  		<ImageView fitWidth="225" fitHeight="300" preserveRatio="true" smooth="true">
+                  		<ImageView fitHeight="300" fitWidth="225" preserveRatio="true" smooth="true">
                   			<image>
-                  				<Image url="images/Logo.jpg"/>
+                  				<Image url="images/Logo.jpg" />
                   			</image>
                   		</ImageView>
                   	</graphic>
@@ -75,7 +75,7 @@
       </BorderPane>
       
       <!-- 우측 UI -->
-      <BorderPane style="-fx-background-color: #EDE7F6;">
+      <BorderPane style="-fx-background-color: #F0F0F6;">
          <StackPane.margin>
             <Insets left="340.0" />
          </StackPane.margin>
@@ -85,16 +85,19 @@
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints prefHeight="80.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="User Login" textFill="#2196f3">
+                  <Label text="User Login" textAlignment="CENTER" textFill="#646465">
                      <font>
-                        <Font name="Arial Bold" size="40.0" />
+                        <Font name="Arial" size="60.0" />
                      </font>
+                     <GridPane.margin>
+                        <Insets top="40.0" />
+                     </GridPane.margin>
                   </Label>
                   <GridPane GridPane.rowIndex="2">
                     <columnConstraints>
@@ -113,12 +116,12 @@
                         <PasswordField fx:id="loginPasswordField" prefHeight="45.0" promptText="Enter Password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <ImageView cache="true" fitHeight="70.0" fitWidth="106.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../images/ID_Blue.jpg" />
+                              <Image url="@../../images/Login_ID_Gray.png" />
                            </image>
                         </ImageView>
                         <ImageView fitHeight="70.0" fitWidth="106.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                            <image>
-                              <Image url="@../../images/Password_Blue.jpg" />
+                              <Image url="@../../images/Login_PW_Gray.png" />
                            </image>
                         </ImageView>
                         
@@ -134,8 +137,9 @@
                   </GridPane>
                   <GridPane GridPane.rowIndex="3">
                     <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="160.0" />
                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
@@ -143,22 +147,27 @@
                      <children>
                      
                      <!-- ID 저장 버튼 -->
-                        <CheckBox fx:id="saveUserName" mnemonicParsing="false" text="Keep UserName">
+                        <CheckBox fx:id="saveUserName" mnemonicParsing="false" text="Save ID">
                            <font>
-                              <Font size="20.0" />
+                              <Font size="22.0" />
                            </font></CheckBox>
-                        <Button fx:id="loginButton" mnemonicParsing="false" style="-fx-background-color: #2196f3; -fx-effect: dropshadow(three-pass-box,rgb(0,0,0,0.7),10,0,5,5);" text="Login" textFill="WHITE" GridPane.columnIndex="1">
+                        <Button fx:id="loginButton" mnemonicParsing="false" style="-fx-background-color: #646465; -fx-effect: dropshadow(three-pass-box,rgb(0,0,0,0.7),10,0,5,5);" text="Login" textFill="WHITE" GridPane.columnIndex="2">
                            <font>
-                              <Font size="24.0" />
+                              <Font name="System Bold" size="24.0" />
                            </font></Button>
+                        <Button fx:id="signUpButton" mnemonicParsing="false" style="-fx-background-color: #646465; -fx-effect: dropshadow(three-pass-box,rgb(0,0,0,0.7),10,0,5,5);" text="Sign Up" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Button>
                      </children>
                      <padding>
-                        <Insets bottom="50.0" left="30.0" right="30.0" />
+                        <Insets bottom="50.0" left="10.0" right="10.0" />
                      </padding>
                   </GridPane>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@../../images/User.jpg" />
+                        <Image url="@../../images/Login_Logo_Gray.png" />
                      </image>
                      <GridPane.margin>
                         <Insets />

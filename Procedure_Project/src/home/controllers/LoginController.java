@@ -9,29 +9,24 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class LoginController implements Initializable {
 	@FXML private Button loginButton;
+	@FXML private Button signUpButton;
 	@FXML private CheckBox saveUserName;
 	@FXML private TextField loginTextField;
 	@FXML private PasswordField loginPasswordField;
@@ -62,6 +57,13 @@ public class LoginController implements Initializable {
 			@Override
 			public void handle(ActionEvent event) {
 				handleLoginButtonAction(event);
+			}
+		});
+		
+		signUpButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				handleSignUpButtonAction(event);
 			}
 		});
 		
@@ -103,6 +105,12 @@ public class LoginController implements Initializable {
 		this.loginProcess();
 	}
 	
+	// Sign Up Button 클릭 시 Action 제어
+	public void handleSignUpButtonAction(ActionEvent event) {
+		this.controller.loadStage("src/home/fxml/SignUp.fxml","명지대학교 수강신청 시스템");
+		signUpButton.getScene().getWindow();
+	}
+	
 	private void loginProcess() {
 		// Login 여부 Check
 		boolean loginCheck;
@@ -113,7 +121,6 @@ public class LoginController implements Initializable {
 				
 		// Login 여부에 따라 Action 제어
 		try {
-			// System.out.println("Input : "+inputID+" / "+inputPassword);
 			loginCheck = this.authenticate(inputID, inputPassword);
 					
 			if(loginCheck) {
@@ -145,12 +152,11 @@ public class LoginController implements Initializable {
 	// Login DB와 사용자 입력값 비교 메소드
 	public boolean authenticate(String inputID, String inputPassword) throws FileNotFoundException{
 		Scanner scanner;
-		scanner = new Scanner(new File("data/login"));
+		scanner = new Scanner(new File("data/user/Login"));
 			
 		while(scanner.hasNext()) {
 			this.read(scanner);
-			// System.out.println("Data : "+dataID+" / "+dataPassword);
-			
+
 			if(this.dataID.equals(inputID)&&this.dataPassword.equals(inputPassword)) {
 				scanner.close();
 				return true;

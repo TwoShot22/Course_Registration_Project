@@ -12,6 +12,7 @@
 <StackPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controllers.TableController">
    <children>
       <BorderPane prefHeight="600.0" prefWidth="800.0">
+      
       <!-- 상단 Label -->
          <top>
             <Pane prefHeight="150.0" style="-fx-background-color: #646465;" BorderPane.alignment="CENTER">
@@ -48,15 +49,16 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="lectureToBasket" mnemonicParsing="false" style="-fx-graphic: url('images/LectureToBasket_Gray.png'); -fx-background-color:transparent" GridPane.columnIndex="4" />
-                        <Button fx:id="lectureRefresh" mnemonicParsing="false" style="-fx-graphic: url('images/Refresh_Gray.png'); -fx-background-color:transparent" GridPane.columnIndex="5" />
+                    	<ComboBox fx:id="campusPickBox" prefWidth="150.0" promptText="Campus" />
+                        <ComboBox fx:id="collegePickBox" prefWidth="150.0" promptText="College" GridPane.columnIndex="1" />
+                        <ComboBox fx:id="departmentPickBox" prefWidth="150.0" promptText="Department" GridPane.columnIndex="2" />
                         <Label text="Confirm" textAlignment="CENTER" GridPane.columnIndex="3">
                            <font>
                               <Font name="Arial" size="24.0" />
-                           </font></Label>
-                        <ComboBox fx:id="campusPickBox" prefWidth="150.0" promptText="Campus" />
-                        <ComboBox fx:id="collegePickBox" prefWidth="150.0" promptText="College" GridPane.columnIndex="1" />
-                        <ComboBox fx:id="departmentPickBox" prefWidth="150.0" promptText="Department" GridPane.columnIndex="2" />
+                           </font>
+                        </Label>
+                        <Button fx:id="lectureToBasket" mnemonicParsing="false" style="-fx-graphic: url('images/LectureToBasket_Gray.png'); -fx-background-color:transparent" GridPane.columnIndex="4" />
+                        <Button fx:id="lectureRefresh" mnemonicParsing="false" style="-fx-graphic: url('images/Refresh_Gray.png'); -fx-background-color:transparent" GridPane.columnIndex="5" />
                      </children>
                      <padding>
                         <Insets bottom="5.0" left="5.0" top="5.0" />
@@ -101,15 +103,15 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <!-- Logout 버튼 -->
-                  <Button fx:id="loginMove" mnemonicParsing="false" style="-fx-graphic: url('images/Logout_White.png'); -fx-background-color:transparent" GridPane.rowIndex="2">
-                  </Button>
-                  
+                                 
                   <!-- Basket 이동 버튼 -->
                   <Button fx:id="basketMove" mnemonicParsing="false" style="-fx-graphic: url('images/Basket_White.png'); -fx-background-color:transparent" GridPane.rowIndex="0" />
                   
                   <!-- User Information 버튼 -->
                   <Button fx:id="userMove" mnemonicParsing="false" style="-fx-graphic:url('images/UserInfo_White.png'); -fx-background-color:transparent" GridPane.rowIndex="1" />
+                 
+                  <!-- Logout 버튼 -->
+                  <Button fx:id="loginMove" mnemonicParsing="false" style="-fx-graphic: url('images/Logout_White.png'); -fx-background-color:transparent" GridPane.rowIndex="2"/>
                </children>
                <padding>
                   <Insets bottom="200.0" top="10.0" />

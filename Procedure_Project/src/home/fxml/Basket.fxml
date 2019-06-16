@@ -34,6 +34,8 @@
          <center>
             <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <center>
+               
+               <!-- Basket Sector  -->
                   <GridPane BorderPane.alignment="CENTER">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -55,6 +57,8 @@
                                 <rowConstraints>
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
+                                
+                                 <!--  Basket Sector - 상단 -->
                                  <children>
                                     <Label text="[Basket]">
                                        <font>
@@ -72,6 +76,8 @@
                                  </padding>
                               </GridPane>
                            </top>
+                           
+                           <!--  Basket Sector - TableView -->
                            <center>
                               <TableView fx:id="basketTable" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
                                 
@@ -92,6 +98,8 @@
                               </TableView>
                            </center>
                         </BorderPane>
+                        
+                        <!--  Register Sector - 상단 -->
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <top>
                               <GridPane BorderPane.alignment="CENTER">
@@ -124,6 +132,7 @@
                               </GridPane>
                            </top>
                            
+                           <!--  Register Sector - Table View -->
                            <center>
                               <TableView fx:id="registerTable" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
                                  
@@ -160,15 +169,15 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <!-- Logout 버튼 -->
-                  <Button fx:id="loginMove" mnemonicParsing="false" style="-fx-graphic: url('images/Logout_White.png'); -fx-background-color:transparent" GridPane.rowIndex="2">
-                  </Button>
                   
                   <!-- Lecture 이동 버튼 -->
                   <Button fx:id="lectureMove" mnemonicParsing="false" style="-fx-graphic: url('images/Lecture_White.png'); -fx-background-color:transparent" GridPane.rowIndex="0" />
                   
                   <!-- User Information 버튼 -->
                   <Button fx:id="userMove" mnemonicParsing="false" style="-fx-graphic:url('images/UserInfo_White.png'); -fx-background-color:transparent" GridPane.rowIndex="1" />
+
+                  <!-- Logout 버튼 -->
+                  <Button fx:id="loginMove" mnemonicParsing="false" style="-fx-graphic: url('images/Logout_White.png'); -fx-background-color:transparent" GridPane.rowIndex="2"/>
                </children>
                <padding>
                   <Insets bottom="200.0" top="10.0" />
