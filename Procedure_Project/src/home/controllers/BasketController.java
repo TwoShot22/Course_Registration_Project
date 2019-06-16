@@ -152,44 +152,53 @@ public class BasketController implements Initializable{
 				}
 				
 				String lectureMessage = "";
-				Alert alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle("Confirm Sending Lecture to Register");
-				alert.setHeaderText("You have selected [ "+selectedLectures.size()+" ] Lectures.\nAre you sure you want to put Lectures in Register?");
-				for(int i=0;i<selectedLectures.size();i++) {
-					lectureMessage+=(selectedLectures.get(i)+"\n");
-				}
-				alert.setContentText(lectureMessage);
 				
-				Optional<ButtonType> result = alert.showAndWait();
-				if(result.get()==ButtonType.OK) {
-					for(int i=0; i<selectedLectures.size();i++) {
-						CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Register","AddLecture");	
-						CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Basket","DeleteLecture");			
-					}
-					
-					try {
-						getBasketList(userID+"_Basket");
-						getRegisterList(userID+"_Register");
-						basketTable.refresh();
-						registerTable.refresh();
-						basketTable.getSelectionModel().clearSelection();
-						registerTable.getSelectionModel().clearSelection();
-					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-					Alert success = new Alert(AlertType.INFORMATION);
-					success.setTitle("Result Notification");
-					success.setHeaderText("Success to Send Lectures in Register");
-					success.setContentText("성공");
-					success.show();
+				if(selectedLectures.size()==0) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Error Occured");
+					alert.setHeaderText("You have selected [ "+selectedLectures.size()+" ] Lectures.\nNo Allowed");
+					alert.setContentText("Please Select Lecture you want to move to Register!");
+					alert.show();
 				} else {
-					Alert cancel = new Alert(AlertType.ERROR);
-					cancel.setTitle("Result Notification");
-					cancel.setHeaderText("Fail to Send Lectures in Register");
-					cancel.setContentText("실패");
-					cancel.show();
+					Alert alert = new Alert(AlertType.CONFIRMATION);
+					alert.setTitle("Confirm Sending Lecture to Register");
+					alert.setHeaderText("You have selected [ "+selectedLectures.size()+" ] Lectures.\nAre you sure you want to put Lectures in Register?");
+					for(int i=0;i<selectedLectures.size();i++) {
+						lectureMessage+=(selectedLectures.get(i)+"\n");
+					}
+					alert.setContentText(lectureMessage);
+					
+					Optional<ButtonType> result = alert.showAndWait();
+					if(result.get()==ButtonType.OK) {
+						for(int i=0; i<selectedLectures.size();i++) {
+							CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Register","AddLecture");	
+							CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Basket","DeleteLecture");			
+						}
+						
+						try {
+							getBasketList(userID+"_Basket");
+							getRegisterList(userID+"_Register");
+							basketTable.refresh();
+							registerTable.refresh();
+							basketTable.getSelectionModel().clearSelection();
+							registerTable.getSelectionModel().clearSelection();
+						} catch (FileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						Alert success = new Alert(AlertType.INFORMATION);
+						success.setTitle("Result Notification");
+						success.setHeaderText("Success to Send Lectures in Register");
+						success.setContentText("성공");
+						success.show();
+					} else {
+						Alert cancel = new Alert(AlertType.ERROR);
+						cancel.setTitle("Result Notification");
+						cancel.setHeaderText("Fail to Send Lectures in Register");
+						cancel.setContentText("실패");
+						cancel.show();
+					}
 				}
 			}
 		});
@@ -214,40 +223,49 @@ public class BasketController implements Initializable{
 				}
 				
 				String lectureMessage = "";
-				Alert alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle("Confirm Delete Lecture");
-				alert.setHeaderText("You have selected [ "+selectedLectures.size()+" ] Lectures.\nAre you sure you want to [Delete] Lectures in Basket?");
-				for(int i=0;i<selectedLectures.size();i++) {
-					lectureMessage+=(selectedLectures.get(i)+"\n");
-				}
-				alert.setContentText(lectureMessage);
 				
-				Optional<ButtonType> result = alert.showAndWait();
-				if(result.get()==ButtonType.OK) {
-					for(int i=0; i<selectedLectures.size();i++) {
-						CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Basket","DeleteLecture");					
-					}
-					
-					try {
-						getBasketList(userID+"_Basket");
-						basketTable.refresh();
-						basketTable.getSelectionModel().clearSelection();
-					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-					Alert success = new Alert(AlertType.INFORMATION);
-					success.setTitle("Result Notification");
-					success.setHeaderText("Success to Delete Lectures in Basket");
-					success.setContentText("성공");
-					success.show();
+				if(selectedLectures.size()==0) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Error Occured");
+					alert.setHeaderText("You have selected [ "+selectedLectures.size()+" ] Lectures.\nNo Allowed");
+					alert.setContentText("Please Select Lecture you want to Delete!");
+					alert.show();
 				} else {
-					Alert cancel = new Alert(AlertType.ERROR);
-					cancel.setTitle("Result Notification");
-					cancel.setHeaderText("Fail to Delete Lectures in Basket");
-					cancel.setContentText("실패");
-					cancel.show();
+					Alert alert = new Alert(AlertType.CONFIRMATION);
+					alert.setTitle("Confirm Delete Lecture");
+					alert.setHeaderText("You have selected [ "+selectedLectures.size()+" ] Lectures.\nAre you sure you want to [Delete] Lectures in Basket?");
+					for(int i=0;i<selectedLectures.size();i++) {
+						lectureMessage+=(selectedLectures.get(i)+"\n");
+					}
+					alert.setContentText(lectureMessage);
+					
+					Optional<ButtonType> result = alert.showAndWait();
+					if(result.get()==ButtonType.OK) {
+						for(int i=0; i<selectedLectures.size();i++) {
+							CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Basket","DeleteLecture");					
+						}
+						
+						try {
+							getBasketList(userID+"_Basket");
+							basketTable.refresh();
+							basketTable.getSelectionModel().clearSelection();
+						} catch (FileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						Alert success = new Alert(AlertType.INFORMATION);
+						success.setTitle("Result Notification");
+						success.setHeaderText("Success to Delete Lectures in Basket");
+						success.setContentText("성공");
+						success.show();
+					} else {
+						Alert cancel = new Alert(AlertType.ERROR);
+						cancel.setTitle("Result Notification");
+						cancel.setHeaderText("Fail to Delete Lectures in Basket");
+						cancel.setContentText("실패");
+						cancel.show();
+					}
 				}
 			}
 		});
@@ -306,45 +324,55 @@ public class BasketController implements Initializable{
 				}
 				
 				String lectureMessage = "";
-				Alert alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle("Confirm Sending Lecture");
-				alert.setHeaderText("You have selected [ "+selectedLectures.size()+" ] Lectures.\nAre you sure you want to throw away Lectures in Basket?");
-				for(int i=0;i<selectedLectures.size();i++) {
-					lectureMessage+=(selectedLectures.get(i)+"\n");
-				}
-				alert.setContentText(lectureMessage);
 				
-				Optional<ButtonType> result = alert.showAndWait();
-				if(result.get()==ButtonType.OK) {
-					for(int i=0; i<selectedLectures.size();i++) {
-						CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Basket","AddLecture");					
-						CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Register","DeleteLecture");					
-					}
-					
-					try {
-						getBasketList(userID+"_Basket");
-						getRegisterList(userID+"_Register");
-						basketTable.refresh();
-						registerTable.refresh();
-						basketTable.getSelectionModel().clearSelection();
-						registerTable.getSelectionModel().clearSelection();
-					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-					Alert success = new Alert(AlertType.INFORMATION);
-					success.setTitle("Result Notification");
-					success.setHeaderText("Success to Throw Away Lectures in Basket");
-					success.setContentText("성공");
-					success.show();
+				if(selectedLectures.size()==0) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Error Occured");
+					alert.setHeaderText("You have selected [ "+selectedLectures.size()+" ] Lectures.\nNo Allowed");
+					alert.setContentText("Please Select Lecture you want to Throw Away to Basket!");
+					alert.show();
 				} else {
-					Alert cancel = new Alert(AlertType.ERROR);
-					cancel.setTitle("Result Notification");
-					cancel.setHeaderText("Fail to Throw Away Lectures in Basket");
-					cancel.setContentText("실패");
-					cancel.show();
+					Alert alert = new Alert(AlertType.CONFIRMATION);
+					alert.setTitle("Confirm Sending Lecture");
+					alert.setHeaderText("You have selected [ "+selectedLectures.size()+" ] Lectures.\nAre you sure you want to throw away Lectures in Basket?");
+					for(int i=0;i<selectedLectures.size();i++) {
+						lectureMessage+=(selectedLectures.get(i)+"\n");
+					}
+					alert.setContentText(lectureMessage);
+					
+					Optional<ButtonType> result = alert.showAndWait();
+					if(result.get()==ButtonType.OK) {
+						for(int i=0; i<selectedLectures.size();i++) {
+							CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Basket","AddLecture");					
+							CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Register","DeleteLecture");					
+						}
+						
+						try {
+							getBasketList(userID+"_Basket");
+							getRegisterList(userID+"_Register");
+							basketTable.refresh();
+							registerTable.refresh();
+							basketTable.getSelectionModel().clearSelection();
+							registerTable.getSelectionModel().clearSelection();
+						} catch (FileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						Alert success = new Alert(AlertType.INFORMATION);
+						success.setTitle("Result Notification");
+						success.setHeaderText("Success to Throw Away Lectures in Basket");
+						success.setContentText("성공");
+						success.show();
+					} else {
+						Alert cancel = new Alert(AlertType.ERROR);
+						cancel.setTitle("Result Notification");
+						cancel.setHeaderText("Fail to Throw Away Lectures in Basket");
+						cancel.setContentText("실패");
+						cancel.show();
+					}
 				}
+				
 			}
 		});
 		
@@ -368,43 +396,51 @@ public class BasketController implements Initializable{
 				}
 				
 				String lectureMessage = "";
-				Alert alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle("Confirm Delete Lecture");
-				alert.setHeaderText("You have selected [ "+selectedLectures.size()+" ] Lectures.\nAre you sure you want to [Delete] Lectures in Register?");
-				for(int i=0;i<selectedLectures.size();i++) {
-					lectureMessage+=(selectedLectures.get(i)+"\n");
-				}
-				alert.setContentText(lectureMessage);
 				
-				Optional<ButtonType> result = alert.showAndWait();
-				if(result.get()==ButtonType.OK) {
-					for(int i=0; i<selectedLectures.size();i++) {
-						CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Register","DeleteLecture");					
-					}
-					
-					try {
-						getRegisterList(userID+"_Register");
-						registerTable.refresh();
-						basketTable.getSelectionModel().clearSelection();
-						registerTable.getSelectionModel().clearSelection();
-					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-					Alert success = new Alert(AlertType.INFORMATION);
-					success.setTitle("Result Notification");
-					success.setHeaderText("Success to Delete Lectures in Register");
-					success.setContentText("성공");
-					success.show();
+				if(selectedLectures.size()==0) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Error Occured");
+					alert.setHeaderText("You have selected [ "+selectedLectures.size()+" ] Lectures.\nNo Allowed");
+					alert.setContentText("Please Select Lecture you want to Delete!");
+					alert.show();
 				} else {
-					Alert cancel = new Alert(AlertType.ERROR);
-					cancel.setTitle("Result Notification");
-					cancel.setHeaderText("Fail to Delete Lectures in Register");
-					cancel.setContentText("실패");
-					cancel.show();
+					Alert alert = new Alert(AlertType.CONFIRMATION);
+					alert.setTitle("Confirm Delete Lecture");
+					alert.setHeaderText("You have selected [ "+selectedLectures.size()+" ] Lectures.\nAre you sure you want to [Delete] Lectures in Register?");
+					for(int i=0;i<selectedLectures.size();i++) {
+						lectureMessage+=(selectedLectures.get(i)+"\n");
+					}
+					alert.setContentText(lectureMessage);
+					
+					Optional<ButtonType> result = alert.showAndWait();
+					if(result.get()==ButtonType.OK) {
+						for(int i=0; i<selectedLectures.size();i++) {
+							CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Register","DeleteLecture");					
+						}
+						
+						try {
+							getRegisterList(userID+"_Register");
+							registerTable.refresh();
+							basketTable.getSelectionModel().clearSelection();
+							registerTable.getSelectionModel().clearSelection();
+						} catch (FileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						Alert success = new Alert(AlertType.INFORMATION);
+						success.setTitle("Result Notification");
+						success.setHeaderText("Success to Delete Lectures in Register");
+						success.setContentText("성공");
+						success.show();
+					} else {
+						Alert cancel = new Alert(AlertType.ERROR);
+						cancel.setTitle("Result Notification");
+						cancel.setHeaderText("Fail to Delete Lectures in Register");
+						cancel.setContentText("실패");
+						cancel.show();
+					}
 				}
-				
 			}
 		});
 		

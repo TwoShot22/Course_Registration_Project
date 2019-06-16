@@ -226,34 +226,40 @@ public class TableController implements Initializable{
 				}
 				
 				String lectureMessage = "";
-				Alert alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle("Confirm Sending Lecture");
-				alert.setHeaderText("You have selected [ "+selectedLectures.size()+" ] Lectures.\nAre you sure you want to put Lectures in Basket?");
-				for(int i=0;i<selectedLectures.size();i++) {
-					lectureMessage+=(selectedLectures.get(i)+"\n");
-				}
-				alert.setContentText(lectureMessage);
-				
-				Optional<ButtonType> result = alert.showAndWait();
-				if(result.get()==ButtonType.OK) {
-					for(int i=0; i<selectedLectures.size();i++) {
-						CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Basket","AddLecture");					
-					}
-					
-					Alert success = new Alert(AlertType.INFORMATION);
-					success.setTitle("Result Notification");
-					success.setHeaderText("Success to Send Lectures in Basket");
-					success.setContentText("성공");
-					success.show();
+				if(selectedLectures.size()==0) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Error Occured");
+					alert.setHeaderText("You have selected [ "+selectedLectures.size()+" ] Lectures.\nNo Allowed");
+					alert.setContentText("Please Select Lecture you want to move to Basket!");
+					alert.show();
 				} else {
-					Alert cancel = new Alert(AlertType.ERROR);
-					cancel.setTitle("Result Notification");
-					cancel.setHeaderText("Fail to Send Lectures in Basket");
-					cancel.setContentText("실패");
-					cancel.show();
+					Alert alert = new Alert(AlertType.CONFIRMATION);
+					alert.setTitle("Confirm Sending Lecture");
+					alert.setHeaderText("You have selected [ "+selectedLectures.size()+" ] Lectures.\nAre you sure you want to put Lectures in Basket?");
+					for(int i=0;i<selectedLectures.size();i++) {
+						lectureMessage+=(selectedLectures.get(i)+"\n");
+					}
+					alert.setContentText(lectureMessage);
+					
+					Optional<ButtonType> result = alert.showAndWait();
+					if(result.get()==ButtonType.OK) {
+						for(int i=0; i<selectedLectures.size();i++) {
+							CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Basket","AddLecture");					
+						}
+						
+						Alert success = new Alert(AlertType.INFORMATION);
+						success.setTitle("Result Notification");
+						success.setHeaderText("Success to Send Lectures in Basket");
+						success.setContentText("성공");
+						success.show();
+					} else {
+						Alert cancel = new Alert(AlertType.ERROR);
+						cancel.setTitle("Result Notification");
+						cancel.setHeaderText("Fail to Send Lectures in Basket");
+						cancel.setContentText("실패");
+						cancel.show();
+					}
 				}
-				
-				
 			}
 		});
 		
