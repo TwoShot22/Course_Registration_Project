@@ -27,6 +27,13 @@ import javafx.stage.Stage;
 public class BasketController implements Initializable{
 	private MainController controller;
 	
+	// Current User Data
+	private String userID;
+	private String userName;
+	private String userCollege;
+	private String userDepartment;
+	private String userNumber;
+	
 	// Basket
 	@FXML TableView<LectureModel> basketTable;
 	
@@ -69,6 +76,29 @@ public class BasketController implements Initializable{
 	
 	public BasketController() {
 		this.controller = new MainController();
+		
+		this.checkCurrentUser();
+		
+	}
+	
+	public void checkCurrentUser() {
+		Scanner scanner;
+		try {
+			scanner = new Scanner(new File("data/user/CurrentUser"));
+	
+			while(scanner.hasNext()) {
+				this.userID = scanner.next();
+				this.userName = scanner.next();
+				this.userCollege = scanner.next();
+				this.userDepartment = scanner.next();
+				this.userNumber = scanner.next();			
+			}
+
+			scanner.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void initialize(URL location, ResourceBundle resources) {
@@ -82,7 +112,7 @@ public class BasketController implements Initializable{
 		basketTimeColumn.setCellValueFactory(cellData->cellData.getValue().timeProperty());
 		
 		try {
-			this.getBasketList("Basket");
+			this.getBasketList(this.userID+"_Basket");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -119,13 +149,13 @@ public class BasketController implements Initializable{
 				}
 				
 				for(int i=0; i<selectedLectures.size();i++) {
-					CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/Register","AddLecture");	
-					CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/Basket","DeleteLecture");			
+					CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Register","AddLecture");	
+					CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Basket","DeleteLecture");			
 				}
 				
 				try {
-					getBasketList("Basket");
-					getRegisterList("Register");
+					getBasketList(userID+"_Basket");
+					getRegisterList(userID+"_Register");
 					basketTable.refresh();
 					registerTable.refresh();
 					basketTable.getSelectionModel().clearSelection();
@@ -158,11 +188,11 @@ public class BasketController implements Initializable{
 				}
 				
 				for(int i=0; i<selectedLectures.size();i++) {
-					CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/Basket","DeleteLecture");					
+					CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Basket","DeleteLecture");					
 				}
 				
 				try {
-					getBasketList("Basket");
+					getBasketList(userID+"_Basket");
 					basketTable.refresh();
 					basketTable.getSelectionModel().clearSelection();
 				} catch (FileNotFoundException e) {
@@ -189,7 +219,7 @@ public class BasketController implements Initializable{
 		registerTimeColumn.setCellValueFactory(cellData->cellData.getValue().timeProperty());
 		
 		try {
-			this.getRegisterList("Register");
+			this.getRegisterList(this.userID+"_Register");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -226,13 +256,13 @@ public class BasketController implements Initializable{
 				}
 				
 				for(int i=0; i<selectedLectures.size();i++) {
-					CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/Basket","AddLecture");					
-					CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/Register","DeleteLecture");					
+					CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Basket","AddLecture");					
+					CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Register","DeleteLecture");					
 				}
 				
 				try {
-					getBasketList("Basket");
-					getRegisterList("Register");
+					getBasketList(userID+"_Basket");
+					getRegisterList(userID+"_Register");
 					basketTable.refresh();
 					registerTable.refresh();
 					basketTable.getSelectionModel().clearSelection();
@@ -265,11 +295,11 @@ public class BasketController implements Initializable{
 				}
 				
 				for(int i=0; i<selectedLectures.size();i++) {
-					CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/Register","DeleteLecture");					
+					CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Register","DeleteLecture");					
 				}
 				
 				try {
-					getRegisterList("Register");
+					getRegisterList(userID+"_Register");
 					registerTable.refresh();
 					basketTable.getSelectionModel().clearSelection();
 					registerTable.getSelectionModel().clearSelection();

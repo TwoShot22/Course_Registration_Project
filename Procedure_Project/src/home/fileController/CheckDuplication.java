@@ -39,6 +39,7 @@ public class CheckDuplication {
 			fileWriter.flush();
 			
 		} catch(Exception e) {
+			System.out.println(targetFileName);
 			System.out.println("File Not Founded");
 		}
 	}
@@ -49,6 +50,19 @@ public class CheckDuplication {
 			
 			FileWriter fileWriter = new FileWriter(targetFile, true);
 			fileWriter.write(userInfo+"\r\n");
+			fileWriter.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("File Not Founded");
+		}
+	}
+	
+	public static void manageCurrentUser(String userInfo, String TargetFileName) {		
+		try {
+			File targetFile = new File(TargetFileName);
+			
+			FileWriter fileWriter = new FileWriter(targetFile, false);
+			fileWriter.write(userInfo);
 			fileWriter.flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

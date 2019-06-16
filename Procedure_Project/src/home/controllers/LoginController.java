@@ -1,6 +1,7 @@
 package home.controllers;
 
 import home.controllers.MainController;
+import home.fileController.CheckDuplication;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -41,6 +42,10 @@ public class LoginController implements Initializable {
 	// DB에 있는 ID, Password
 	private String dataID;
 	private String dataPassword;
+	private String dataName;
+	private String dataCollege;
+	private String dataDepartment;
+	private String dataNumber;
 	
 	// ID 저장
 	private String tempID;
@@ -124,6 +129,9 @@ public class LoginController implements Initializable {
 			loginCheck = this.authenticate(inputID, inputPassword);
 					
 			if(loginCheck) {
+				String userInfo = this.dataID + " "+this.dataName+" "+this.dataCollege + " "+this.dataDepartment + " "+this.dataNumber;
+				CheckDuplication.manageCurrentUser(userInfo, "data/user/CurrentUser");
+				
 				this.controller.loadStage("src/home/fxml/Table.fxml","명지대학교 수강신청 시스템");
 				Stage login = (Stage)loginButton.getScene().getWindow();
 				login.close();
@@ -147,6 +155,10 @@ public class LoginController implements Initializable {
 	public void read(Scanner scanner) {
 		this.dataID = scanner.next();
 		this.dataPassword = scanner.next();
+		this.dataName = scanner.next();
+		this.dataCollege = scanner.next();
+		this.dataDepartment = scanner.next();
+		this.dataNumber = scanner.next();
 	}
 	
 	// Login DB와 사용자 입력값 비교 메소드

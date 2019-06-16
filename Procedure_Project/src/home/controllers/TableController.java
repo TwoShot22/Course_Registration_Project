@@ -67,6 +67,13 @@ public class TableController implements Initializable{
 	
 	private Object oldValue;
 	
+	// Current User Data
+	private String userID;
+	private String userName;
+	private String userCollege;
+	private String userDepartment;
+	private String userNumber;
+	
 	// Button
 	@FXML Button lectureToBasket;
 	@FXML Button lectureRefresh;
@@ -82,13 +89,36 @@ public class TableController implements Initializable{
 	
 	public TableController() {
 		this.controller = new MainController();
+		
+		this.checkCurrentUser();
 		this.fileTool = new FileTool();
-		this.checkDuplication = new CheckDuplication();
+		this.checkDuplication = new CheckDuplication();		
+	}
+	
+	public void checkCurrentUser() {
+		Scanner scanner;
+		try {
+			scanner = new Scanner(new File("data/user/CurrentUser"));
+	
+			while(scanner.hasNext()) {
+				this.userID = scanner.next();
+				this.userName = scanner.next();
+				this.userCollege = scanner.next();
+				this.userDepartment = scanner.next();
+				this.userNumber = scanner.next();			
+			}
+
+			scanner.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	// Initialize Methods
 	public void initialize(URL location, ResourceBundle resources) {
-		
+	
 		// Directory Part
 		campusItems = FXCollections.observableArrayList();
 		campusList = FXCollections.observableArrayList();
@@ -191,7 +221,7 @@ public class TableController implements Initializable{
 				}
 				
 				for(int i=0; i<selectedLectures.size();i++) {
-					CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/Basket","AddLecture");					
+					CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Basket","AddLecture");					
 				}
 			}
 		});
