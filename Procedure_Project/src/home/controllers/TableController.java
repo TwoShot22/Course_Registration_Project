@@ -3,6 +3,7 @@ package home.controllers;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.Vector;
@@ -21,12 +22,16 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 public class TableController implements Initializable{	
@@ -220,9 +225,35 @@ public class TableController implements Initializable{
 					selectedLectures.add(selectedLecture.get(i)+" "+selectedLecture.get(i+1)+" "+selectedLecture.get(i+2)+" "+selectedLecture.get(i+3)+" "+selectedLecture.get(i+4));
 				}
 				
-				for(int i=0; i<selectedLectures.size();i++) {
-					CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Basket","AddLecture");					
+				String lectureMessage = "";
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("Confirm Sending Lecture");
+				alert.setHeaderText("You have selected [ "+selectedLectures.size()+" ] Lectures.\nAre you sure you want to put Lectures in Basket?");
+				for(int i=0;i<selectedLectures.size();i++) {
+					lectureMessage+=(selectedLectures.get(i)+"\n");
 				}
+				alert.setContentText(lectureMessage);
+				
+				Optional<ButtonType> result = alert.showAndWait();
+				if(result.get()==ButtonType.OK) {
+					for(int i=0; i<selectedLectures.size();i++) {
+						CheckDuplication.manageLectureFile(selectedLectures.get(i),"data/user/"+userID+"_Basket","AddLecture");					
+					}
+					
+					Alert success = new Alert(AlertType.INFORMATION);
+					success.setTitle("Result Notification");
+					success.setHeaderText("Success to Send Lectures in Basket");
+					success.setContentText("성공");
+					success.show();
+				} else {
+					Alert cancel = new Alert(AlertType.ERROR);
+					cancel.setTitle("Result Notification");
+					cancel.setHeaderText("Fail to Send Lectures in Basket");
+					cancel.setContentText("실패");
+					cancel.show();
+				}
+				
+				
 			}
 		});
 		
