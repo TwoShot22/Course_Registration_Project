@@ -279,6 +279,13 @@ public class TableController implements Initializable{
 			}
 		});
 		
+		userMove.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				handleUserMoveAction(event);
+			}
+		});
+		
 		loginMove.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				handleLoginMoveAction(event);
@@ -441,6 +448,10 @@ public class TableController implements Initializable{
 		this.controller.loadStage("src/home/fxml/Basket.fxml", "명지대학교 수강신청 시스템");
 		Stage lecture = (Stage)basketMove.getScene().getWindow();
 		lecture.close();
+	}
+	
+	public void handleUserMoveAction(ActionEvent event) {
+		this.controller.loadStage("src/home/fxml/UserInfo.fxml", "명지대학교 수강신청 시스템");
 	}
 	
 	public void handleLoginMoveAction(ActionEvent event) {

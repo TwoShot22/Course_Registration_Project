@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -29,6 +30,7 @@ public class MainController implements Initializable {
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.setTitle(title);
+	        stage.getIcons().add(new Image("images/Myongji_Logo.gif"));
 			stage.show();
 		} catch(IOException e) {
 			e.printStackTrace();

@@ -105,6 +105,8 @@ public class BasketController implements Initializable{
 	}
 	
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		
 		// Basket
 		basketTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
@@ -163,6 +165,7 @@ public class BasketController implements Initializable{
 					Alert alert = new Alert(AlertType.CONFIRMATION);
 					alert.setTitle("Confirm Sending Lecture to Register");
 					alert.setHeaderText("You have selected [ "+selectedLectures.size()+" ] Lectures.\nAre you sure you want to put Lectures in Register?");
+					
 					for(int i=0;i<selectedLectures.size();i++) {
 						lectureMessage+=(selectedLectures.get(i)+"\n");
 					}
@@ -460,6 +463,13 @@ public class BasketController implements Initializable{
 			}
 		});
 		
+		userMove.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				handleUserMoveAction(event);
+			}
+		});
+		
 		loginMove.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -533,6 +543,10 @@ public class BasketController implements Initializable{
 			this.controller.loadStage("src/home/fxml/Table.fxml","명지대학교 수강신청 시스템");
 			Stage basket = (Stage)lectureMove.getScene().getWindow();
 			basket.close();
+		}
+		
+		public void handleUserMoveAction(ActionEvent event) {
+			this.controller.loadStage("src/home/fxml/UserInfo.fxml", "명지대학교 수강신청 시스템");
 		}
 		
 		public void handleLoginMoveAction(ActionEvent event) {
