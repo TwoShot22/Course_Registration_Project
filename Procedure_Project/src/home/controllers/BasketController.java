@@ -39,6 +39,7 @@ public class BasketController implements Initializable{
 	private String userNumber;
 	
 	// Basket
+	
 	@FXML TableView<LectureModel> basketTable;
 	
 	@FXML TableColumn<LectureModel, Integer> basketNumberColumn;
@@ -52,6 +53,7 @@ public class BasketController implements Initializable{
 	@FXML Button basketRefresh;
 	
 	// Register
+	
 	@FXML TableView<LectureModel> registerTable;
 	
 	@FXML TableColumn<LectureModel, Integer> registerNumberColumn;
@@ -64,7 +66,7 @@ public class BasketController implements Initializable{
 	@FXML Button registerDelete;
 	@FXML Button registerRefresh;
 	
-	// Data
+	// Table Datas
 	private Vector<LectureModel> basketModels;
 	ObservableList<LectureModel> basketList = FXCollections.observableArrayList();
 	private Object basketOldValue;
@@ -73,7 +75,7 @@ public class BasketController implements Initializable{
 	ObservableList<LectureModel> registerList = FXCollections.observableArrayList();
 	private Object registerOldValue;
 	
-	// Control Bar
+	// Left Control Bar
 	@FXML Button lectureMove;
 	@FXML Button userMove;
 	@FXML Button loginMove;
@@ -84,6 +86,7 @@ public class BasketController implements Initializable{
 		this.checkCurrentUser();
 	}
 	
+	// Check Login User
 	public void checkCurrentUser() {
 		Scanner scanner;
 		try {
@@ -96,17 +99,13 @@ public class BasketController implements Initializable{
 				this.userDepartment = scanner.next();
 				this.userNumber = scanner.next();			
 			}
-
 			scanner.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public void initialize(URL location, ResourceBundle resources) {
-		
-		
+	public void initialize(URL location, ResourceBundle resources) {		
 		// Basket
 		basketTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
@@ -134,6 +133,7 @@ public class BasketController implements Initializable{
 			}
 		});
 		
+		// Basket -> Register 강좌 이동 메소드
 		basketToRegister.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -149,12 +149,14 @@ public class BasketController implements Initializable{
 					selectedLecture.add(selectedItem.get(i).getTime());
 				}
 				
+				// Make Sentence to Compare
 				for(int i=0;i<selectedLecture.size();i+=5) {
 					selectedLectures.add(selectedLecture.get(i)+" "+selectedLecture.get(i+1)+" "+selectedLecture.get(i+2)+" "+selectedLecture.get(i+3)+" "+selectedLecture.get(i+4));
 				}
 				
 				String lectureMessage = "";
 				
+				// Alert Method
 				if(selectedLectures.size()==0) {
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("Error Occured");
@@ -162,6 +164,7 @@ public class BasketController implements Initializable{
 					alert.setContentText("Please Select Lecture you want to move to Register!");
 					alert.show();
 				} else {
+					// selectedItem != null
 					Alert alert = new Alert(AlertType.CONFIRMATION);
 					alert.setTitle("Confirm Sending Lecture to Register");
 					alert.setHeaderText("You have selected [ "+selectedLectures.size()+" ] Lectures.\nAre you sure you want to put Lectures in Register?");

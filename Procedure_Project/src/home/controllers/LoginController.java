@@ -26,11 +26,14 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class LoginController implements Initializable {
+	
 	@FXML private Button loginButton;
 	@FXML private Button signUpButton;
 	@FXML private CheckBox saveUserName;
+	
 	@FXML private TextField loginTextField;
 	@FXML private PasswordField loginPasswordField;
+	
 	@FXML private Label loginErrorMessage;
 	
 	private MainController controller;

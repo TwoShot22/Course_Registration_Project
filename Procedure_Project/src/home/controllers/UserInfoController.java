@@ -75,15 +75,6 @@ public class UserInfoController implements Initializable{
 		numberLabel.setText("Number : "+this.userNumber);
 		collegeLabel.setText("College : "+this.userCollege);
 		departmentLabel.setText("Dept. : "+this.userDepartment);
-		
-		Stage stage = new Stage();
-		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			@Override
-			public void handle(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
 	}
 	
 	private void handleCloseWindowButton(ActionEvent event) {

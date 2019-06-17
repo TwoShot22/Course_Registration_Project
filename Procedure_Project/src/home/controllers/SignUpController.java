@@ -11,9 +11,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class SignUpController implements Initializable {
@@ -109,12 +111,18 @@ public class SignUpController implements Initializable {
 				CheckDuplication.manageUserFile(userInfo, "data/User/Login");
 				this.signUpCheck = true;
 			} else if(!idCheck && numberCheck) {
-				System.out.println("한 사람당 한 ID");
-				
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Sign Up Failed");
+				alert.setHeaderText("Only One ID allowed for One Person");
+				alert.setContentText("Please Try Again");
+				alert.show();
 				this.signUpCheck = false;
 			} else {
-				System.out.println("중복 ID");
-				
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Sign Up Failed");
+				alert.setHeaderText("There is Duplicated ID");
+				alert.setContentText("Please Try Again");
+				alert.show();
 				this.signUpCheck = false;
 			}
 		} catch (FileNotFoundException e) {

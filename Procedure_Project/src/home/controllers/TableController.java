@@ -31,7 +31,6 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 public class TableController implements Initializable{	
