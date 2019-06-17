@@ -111,13 +111,20 @@
                   <Button fx:id="userMove" mnemonicParsing="false" style="-fx-graphic:url('images/UserInfo_White.png'); -fx-background-color:transparent" GridPane.rowIndex="1" />
                  
                   <!-- Logout 버튼 -->
-                  <Button fx:id="loginMove" mnemonicParsing="false" style="-fx-graphic: url('images/Logout_White.png'); -fx-background-color:transparent" GridPane.rowIndex="2"/>
+                  <Button fx:id="loginMove" mnemonicParsing="false" style="-fx-graphic: url('images/Logout_White.png'); -fx-background-color:transparent" GridPane.rowIndex="2" />
                </children>
                <padding>
                   <Insets bottom="200.0" top="10.0" />
                </padding>
             </GridPane>
          </left>
+         <bottom>
+            <Label fx:id="userNotification" text="User Notification" textAlignment="CENTER" textFill="#646465" BorderPane.alignment="BOTTOM_RIGHT">
+               <BorderPane.margin>
+                  <Insets right="20.0" />
+               </BorderPane.margin>
+            </Label>
+         </bottom>
         </BorderPane>
    </children>
 </StackPane>

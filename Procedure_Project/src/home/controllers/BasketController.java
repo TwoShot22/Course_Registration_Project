@@ -22,6 +22,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -80,6 +81,8 @@ public class BasketController implements Initializable{
 	@FXML Button userMove;
 	@FXML Button loginMove;
 	
+	@FXML Label userNotification;
+	
 	public BasketController() {
 		this.controller = new MainController();
 		
@@ -106,6 +109,8 @@ public class BasketController implements Initializable{
 	}
 	
 	public void initialize(URL location, ResourceBundle resources) {		
+		this.userNotification.setText(this.userName+"´Ô, ¹Ý°©½À´Ï´Ù:)");
+		
 		// Basket
 		basketTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		

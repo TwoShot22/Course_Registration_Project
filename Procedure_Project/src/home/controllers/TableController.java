@@ -27,6 +27,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -86,6 +87,8 @@ public class TableController implements Initializable{
 	@FXML Button userMove;
 	@FXML Button loginMove;
 	
+	@FXML Label userNotification;
+	
 	// Load Basket.fxml
 	private MainController controller;
 	private FileTool fileTool;
@@ -122,7 +125,8 @@ public class TableController implements Initializable{
 	
 	// Initialize Methods
 	public void initialize(URL location, ResourceBundle resources) {
-	
+		userNotification.setText(this.userName+"님, 반갑습니다:)");
+		
 		// Directory Part
 		campusItems = FXCollections.observableArrayList();
 		campusList = FXCollections.observableArrayList();
