@@ -1,4 +1,4 @@
-# Class_Registration_System Project
+# Course_Registration_System Project
 -------------------
 ![Version](https://img.shields.io/badge/Version-1.0.0-green.svg) ![Language](https://img.shields.io/badge/Language-Java-darkgreen.svg) ![University](https://img.shields.io/badge/University-MJU(Seoul)-blue.svg)
 
